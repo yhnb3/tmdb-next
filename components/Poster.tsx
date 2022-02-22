@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
 import Link from 'next/link'
+import Image from 'next/image';
 
 import Rate from './Rate'
 
@@ -36,8 +37,9 @@ const Poster = ({ content} : Props) => {
   return (
     <div className="h-list">
       <div className="relative h-img w-img top-0 flex-col whitespace-normal shadow-md rounded-lg">
-        <Link href={pathUrl}>
-          <img
+        <Link href={pathUrl} passHref>
+          <Image
+            layout='fill'
             className="rounded-lg object-cover w-img h-full mx-auto"
             src={posterUrl}
             alt=""
