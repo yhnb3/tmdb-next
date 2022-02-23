@@ -21,7 +21,7 @@ export default function DropMenu({ category, menus, isVisible } : Props) {
       }`}
     >
       {menus.map((element : Menu) => (
-        <div key={element.name} className="my-2 mx-2 w-full">
+        <div key={element.name} className="my-2 mx-2 w-full cursor-pointer">
           <Link
             href={`/${category}/${element.url}`}
           >

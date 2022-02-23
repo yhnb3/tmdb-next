@@ -35,8 +35,8 @@ const Poster = ({ content} : Props) => {
 
 
   return (
-    <div className="h-list">
-      <div className="relative h-img w-img top-0 flex-col whitespace-normal shadow-md rounded-lg">
+    <div className="h-list w-img">
+      <div className="relative h-img w-img top-0 flex-col shadow-md rounded-lg">
         <Link href={pathUrl} passHref>
           <Image
             layout='fill'
@@ -46,11 +46,11 @@ const Poster = ({ content} : Props) => {
           />
         </Link>
         <Rate score={content.vote_average} times={1}/>
-        <div className="mt-4">
-          <p className="text-md font-bold">{title}</p>
+      </div>
+      <div className="mt-4">
+          <p className="text-md font-bold whitespace-normal">{title}</p>
           <p className="text-sm text-gray-400">{handlingDate}</p>
         </div>
-      </div>
     </div>
   );
 }
