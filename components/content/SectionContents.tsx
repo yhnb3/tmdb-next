@@ -2,6 +2,8 @@ import React from 'react'
 import Poster from '../Poster'
 import SearchContent from '../SearchContent'
 
+import withContentsPage from '../../HOC/withContentsPage'
+
 interface Content {
   title? : string,
   name? : string,
@@ -25,7 +27,7 @@ const SectionContents = ({data}) => {
       {data.map((contents : { results : Array<Content>}) =>
         contents.results.map((element: Content) => (
           <div key={element.id}> 
-            <div className="h-list">
+            <div className="h-list w-img mx-auto">
               <Poster content={element} key={element.id} />
             </div>
           </div>
@@ -35,4 +37,4 @@ const SectionContents = ({data}) => {
   );
 };
 
-export default SectionContents
+export default withContentsPage(SectionContents)

@@ -24,4 +24,4 @@ const Rate = ({score, times} : Props) => {
   );
 };
 
-export default React.memo(Rate)
+export default Rate

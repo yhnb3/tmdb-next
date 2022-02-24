@@ -4,10 +4,10 @@ import Head from "next/head";
 
 import Layout from '../../components/Layout';
 
-import ContentsPage from '../../components/content/ContentsPage';
+import SectionContents from '../../components/content/SectionContents';
 
 export default function NowPlaying() {
-  return <ContentsPage section="now_playing" category="movie" head_line="현재 상영 영화" />
+  return <SectionContents section="now_playing" category="movie" head_line="현재 상영 영화" />
 }
 
 NowPlaying.getLayout = function getLayout(page: ReactElement) {

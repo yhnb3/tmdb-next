@@ -4,10 +4,10 @@ import Head from "next/head";
 
 import Layout from '../../components/Layout';
 
-import ContentsPage from '../../components/content/ContentsPage';
+import SectionContents from '../../components/content/SectionContents';
 
 export default function TopRated() {
-  return <ContentsPage section="top_rated" category="movie" head_line="높은 평점의 인기 영화" />
+  return <SectionContents section="top_rated" category="movie" head_line="높은 평점의 인기 영화" />
 }
 TopRated.getLayout = function getLayout(page: ReactElement) {
   return (

@@ -55,4 +55,4 @@ const Poster = ({ content} : Props) => {
   );
 }
 
-export default Poster
+export default React.memo(Poster)

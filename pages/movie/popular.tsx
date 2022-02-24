@@ -4,10 +4,10 @@ import Head from "next/head";
 
 import Layout from '../../components/Layout';
 
-import ContentsPage from '../../components/content/ContentsPage';
+import SectionContents from '../../components/content/SectionContents';
 
 export default function Popular() {
-  return <ContentsPage section="popular" category="movie" head_line="인기 영화" />
+  return <SectionContents section="popular" category="movie" head_line="인기 영화" />
 }
 
 Popular.getLayout = function getLayout(page: ReactElement) {

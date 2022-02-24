@@ -88,4 +88,4 @@ const RateCircle =({ score, color, times } :Props) => {
   );
 }
 
-export default React.memo(RateCircle)
+export default RateCircle

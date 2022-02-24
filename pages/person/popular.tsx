@@ -4,17 +4,17 @@ import Head from "next/head";
 
 import Layout from '../../components/Layout';
 
-import SectionContents from '../../components/content/SectionContents';
+import PersonContents from '../../components/content/PersonContents';
 
 export default function Popular() {
-  return <SectionContents section="popular" category="tv" head_line="인기 TV 프로그램" />
+  return <PersonContents section="popular" category="person" head_line="인기 인물" />
 }
 
 Popular.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
       <Head>
-        <title>인기 TV 프로그램</title>
+        <title>인기 인물</title>
         <meta name="description" content="Helmet application" />
       </Head>
       {page}
