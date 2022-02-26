@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import useFetchData from '../../hooks/useFetchData'
 
 import ContentDetail from '../../components/detail/ContentDetail'
+import ContentMobileDetail from '../../components/detail/ContentMobileDetail'
 
 interface Props {
   section: string,
@@ -18,6 +19,6 @@ const DetailPage = ({section} : Props) => {
   if (loading) return <p>로딩중....</p>;
   if (error) return <p>데이터를 불러오는데 실패하였습니다.</p>;
 
-  // if (window.innerWidth <= 500) return <MobileDetail content={data} />;
+  if (typeof window === "undefined" && window.innerWidth <= 500) return <ContentMobileDetail content={data} />;
   return <ContentDetail content={data} section={section}/>;
 }
