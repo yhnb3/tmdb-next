@@ -17,7 +17,9 @@ const RecommendationPoster : React.FC<Props> = ({content} : Props) => {
   return <div>
     <Link href={`/${section}/${content.id}`} passHref>
       <Image
-        className="w-sm_backdrop h-sm_backdrop object-cover rounded-md"
+        className="object-cover rounded-md"
+        width={250}
+        height={141}
         src={
           content.backdrop_path
             ? `https://image.tmdb.org/t/p/original/${content.backdrop_path}`

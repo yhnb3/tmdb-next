@@ -34,7 +34,9 @@ export default function SeasonSection({ content } : Props) {
     <div className="flex mt-5 border-gray-300 border rounded-lg">
       <Link href={pathUrl} passHref>
         <Image
-          className="rounded-l-lg object-cover object-top h-img w-img"
+          width={146.2}
+          height={225}
+          className="rounded-l-lg object-cover object-top"
           src={posterUrl}
           alt=""
         />

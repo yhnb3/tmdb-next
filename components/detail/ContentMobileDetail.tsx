@@ -1,6 +1,6 @@
-import React from "react";
+import * as React from "react";
 
-import RateCircle from "./rateCircle";
+import Rate from "../Rate";
 import { ImportantCrew, RecommendationSection } from "./section";
 import MobileCastList from "./section/MobileCastList.tsx";
 
@@ -13,24 +13,6 @@ export default function mobileDetail({ content }) {
   const runtime = {
     hour: parseInt(content.runtime / 60, 10),
     minute: content.runtime % 60,
-  };
-
-  const rate = (score) => {
-    let color = "green";
-
-    if (score < 7) {
-      color = "yellow";
-    }
-
-    if (score < 4) {
-      color = "red";
-    }
-
-    return (
-      <div className="h-10">
-        <RateCircle rate={score} color={color} times={1} />
-      </div>
-    );
   };
 
   const renderGenre = () => {
@@ -80,7 +62,7 @@ export default function mobileDetail({ content }) {
             </span>
           </div>
           <div className="flex flex-row p-4">
-            <div>{rate(content.vote_average)}</div>
+            <Rate score={content.vote_average} times="1" />
             <span className="text-white text-sm font-bold align-middle p-2">
               회원점수
             </span>

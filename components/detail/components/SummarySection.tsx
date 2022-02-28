@@ -3,9 +3,10 @@ import Image from 'next/image'
 
 import useFetchData from '../../../hooks/useFetchData';
 
-import RateCircle from '../../RateCircle';
+import Rate from '../../Rate';
 
 import  handlingProvider  from '../utils/handlingProvider';
+
 
 interface Props {
   content: {
@@ -32,7 +33,7 @@ const SummarySection: React.FC<Props> = ({content} : Props) => {
   const posterUrl = `https://image.tmdb.org/t/p/w300/${content.poster_path}`;
   const title = content.title || content.name;
 
-  const endPoint = `https://api.themoviedb.org/3/${section}/${content.id}/watch/providers?api_key=${process.env.REACT_APP_API_CODE}`
+  const endPoint = `https://api.themoviedb.org/3/${section}/${content.id}/watch/providers?api_key=${process.env.NEXT_PUBLIC_API_CODE}`
   const { loading, data, error } = useFetchData({endPoint})
 
   const Providers = () => {
@@ -40,10 +41,13 @@ const SummarySection: React.FC<Props> = ({content} : Props) => {
     if (error) return <></>
 
     const providers = handlingProvider({provider: data.results.KR})
+    console.log(providers)
     return <div className="flex flex-row my-2">
     {providers.map((element: { id: string; logo_path: string; }) => (
       <Image
-        className="h-14 rounded-md mx-2"
+        className="rounded-md mx-2"
+        width={60}
+        height={60}
         key={element.id}
         src={`https://www.themoviedb.org/t/p/original/${element.logo_path}`}
         alt=""
@@ -63,41 +67,24 @@ const SummarySection: React.FC<Props> = ({content} : Props) => {
     </span>
   );
 
-  const rate = (score: number) => {
-    let color = 'green';
-
-    if (score < 7) {
-      color = 'yellow';
-    }
-
-    if (score < 4) {
-      color = 'red';
-    }
-
-    return (
-      <div className="h-10">
-        <RateCircle score={score} color={color} times={1.5} />
-      </div>
-    );
-  };
-
   return (
   <div className="relative h-poster">
   {content.backdrop_path ? (
     <Image
-      className="h-poster w-full object-cover object-top z-20 opacity-50"
+      layout="fill"
+      className="h-poster w-full object-cover object-top z-5 opacity-50"
       src={backdropUrl}
       alt=""
     />
   ) : (
     <></>
   )}
-  <div className="absolute w-full h-full bg-black bg-opacity-70 top-0 z-10" />
+  <div className="absolute w-full h-full bg-black opacity-75 top-0 z-10" />
   <div className="absolute h-3/4 bottom-1/8 w-full z-20">
     <div className="flex flex-row w-screen mx-auto">
       <div className="h-full">
         {content.poster_path ? (
-          <Image className="h-full rounded-lg" src={posterUrl} alt="" />
+          <Image className="h-full rounded-lg" width={300} height={450} src={posterUrl} alt="" />
         ) : (
           <></>
         )}
@@ -116,7 +103,7 @@ const SummarySection: React.FC<Props> = ({content} : Props) => {
             {renderGenre()}
           </div>
         </div>
-        <div className="h-16 my-2">{rate(content.vote_average)}</div>
+        <div className="h-16 bottom-8 relative"><Rate score={content.vote_average} times={1.5}/></div>
         <p className="text-lg italic text-gray-400 my-2">
           {content.tagline}
         </p>
