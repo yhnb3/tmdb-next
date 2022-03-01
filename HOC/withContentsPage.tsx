@@ -12,7 +12,7 @@ interface withContentsPageProps {
 
 const withContentsPage = <P extends object>(Component: React.ComponentType<P>) => {
   const WithContentsPage = ({section, category, head_line, ...props} : withContentsPageProps) => {
-    const { data, error, isLoading, size, setSize} = useInfiniteFetchData({section, category});
+    const { data, error, size, setSize} = useInfiniteFetchData({section, category});
 
     return (
       <div className="mx-auto w-screen pt-10 mobile:px-5 mobile:w-full">
@@ -20,7 +20,6 @@ const withContentsPage = <P extends object>(Component: React.ComponentType<P>) =
           {head_line}
         </p>
         <InfiniteScroll
-          isLoading={isLoading}
           error={error}
           size={size}
           dataLen={data.length}

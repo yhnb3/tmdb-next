@@ -26,7 +26,6 @@ interface Props {
   } 
 }
 const SummarySection: React.FC<Props> = ({content} : Props) => {
-  console.log(content.production_countries)
   const section = content.title ? 'movie' : 'tv'
   const date = content.title ? content.release_date : content.first_air_date;
   const backdropUrl = `https://image.tmdb.org/t/p/original/${content.backdrop_path}`;
@@ -41,17 +40,22 @@ const SummarySection: React.FC<Props> = ({content} : Props) => {
     if (error) return <></>
 
     const providers = handlingProvider({provider: data.results.KR})
-    console.log(providers)
     return <div className="flex flex-row my-2">
-    {providers.map((element: { id: string; logo_path: string; }) => (
-      <Image
+    {providers.map((element: { display_priority: string; logo_path: string; }) => (
+      <div
+        key={element.display_priority}
+        className="mr-4"
+      >
+        <Image
+        
         className="rounded-md mx-2"
         width={60}
         height={60}
-        key={element.id}
         src={`https://www.themoviedb.org/t/p/original/${element.logo_path}`}
         alt=""
-      />
+      />  
+      </div>
+      
     ))}
   </div>
   }
@@ -71,6 +75,7 @@ const SummarySection: React.FC<Props> = ({content} : Props) => {
   <div className="relative h-poster">
   {content.backdrop_path ? (
     <Image
+      priority
       layout="fill"
       className="h-poster w-full object-cover object-top z-5 opacity-50"
       src={backdropUrl}

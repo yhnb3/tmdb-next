@@ -15,7 +15,8 @@ interface Props {
 const RecommendationPoster : React.FC<Props> = ({content} : Props) => {
   const section = content.title ? "movie" : "tv"
   return <div>
-    <Link href={`/${section}/${content.id}`} passHref>
+    <Link href={`/${section}/${content.id}`}>
+      <a>
       <Image
         className="object-cover rounded-md"
         width={250}
@@ -27,6 +28,8 @@ const RecommendationPoster : React.FC<Props> = ({content} : Props) => {
         }
         alt={content.name || content.title}
       />
+      </a>
+      
     </Link>
     <div className="flex justify-between mb-2 w-sm_backdrop">
       <p className="line-clamp-1 max-h-6 text-sm  w-10/12">

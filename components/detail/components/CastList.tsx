@@ -27,6 +27,7 @@ const CastList : React.FC<Props> = ({id, section} : Props) => {
               key={element.id}
             >
               <Link href={`/person/${element.id}`} passHref>
+                <a>
                 <Image
                   className="object-cover object-top rounded-lg"
                   width={142}
@@ -34,6 +35,7 @@ const CastList : React.FC<Props> = ({id, section} : Props) => {
                   src={element.profile_path ? `https://image.tmdb.org/t/p/original/${element.profile_path}` : 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'}
                   alt={element.name}
                 />
+                </a>
               </Link>
               <div className="p-1">
                 <p className="font-bold">{element.name}</p>
@@ -44,7 +46,7 @@ const CastList : React.FC<Props> = ({id, section} : Props) => {
             </div>
           );
         }
-        return <></>;
+        return null;
       })}
     </div>
   </div>

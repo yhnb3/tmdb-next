@@ -2,7 +2,7 @@ import useSWRInfinite from 'swr/infinite';
 import axios from 'axios';
 
 interface Props {
-  section: string,
+  query: string | string[],
   category: string,
 }
 
@@ -11,7 +11,7 @@ interface Data {
   total_pages: number,
 }
 
-const useInfiniteFetchData = ({ section, category } :Props) => {
+const useInfiniteFetchData = ({ category, query } :Props) => {
   const fetcher = (url : string) => axios.get(url).then((res) => res.data);
 
   const getKey = (pageIndex:number, previousPageData:Data) => {
@@ -20,9 +20,11 @@ const useInfiniteFetchData = ({ section, category } :Props) => {
       previousPageData.page === previousPageData.total_pages
     )
       return null;
-    return `https://api.themoviedb.org/3/${category}/${section}?api_key=${
+    return `https://api.themoviedb.org/3/search/${category}?api_key=${
       process.env.NEXT_PUBLIC_API_CODE
-    }&language=ko&page=${pageIndex + 1}`;
+    }&language=ko&query=${query}&page=${
+      pageIndex + 1
+    }&include_adult=false`;
   };
 
   const {
@@ -32,11 +34,11 @@ const useInfiniteFetchData = ({ section, category } :Props) => {
     setSize,
   } = useSWRInfinite(getKey, fetcher);
 
-  const initialLoading = !data && !error;
+  const initialLoading = data.length === 0 && !error;
   const loading = initialLoading || (size > 0 && data && typeof data[size -1] === 'undefined')
 
   return {
-    size, setSize, data, error, loading
+    size, setSize, data, error, loading, initialLoading
   }
 }
 

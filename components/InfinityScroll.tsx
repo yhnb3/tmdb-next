@@ -3,7 +3,6 @@ import * as React from 'react'
 import { throttle } from 'lodash';
 
 interface Props {
-  isLoading: boolean,
   size: number,
   error: boolean,
   setSize: (size: number) => void,

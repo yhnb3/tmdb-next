@@ -37,13 +37,17 @@ const Poster = ({ content} : Props) => {
   return (
     <div className="h-list w-img">
       <div className="relative h-img w-img top-0 flex-col shadow-md rounded-lg">
-        <Link href={pathUrl} passHref>
-          <Image
-            layout='fill'
-            className="rounded-lg object-cover w-img h-full mx-auto"
-            src={posterUrl}
-            alt=""
-          />
+        <Link href={pathUrl}>
+          <a>
+            <div className='relative w-img h-full'>
+              <Image
+                layout='fill'
+                className="rounded-lg object-cover mx-auto"
+                src={posterUrl}
+                alt=""
+              />
+            </div>
+          </a>
         </Link>
         <Rate score={content.vote_average} times={1}/>
       </div>

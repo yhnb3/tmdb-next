@@ -16,7 +16,6 @@ const DetailPage = ({section} : Props) =>{
   const router = useRouter()
   const { id } = router.query
   const endPoint = `https://api.themoviedb.org/3/${section}/${id}?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko`;
-
   const { data, error, loading} = useFetchData({endPoint})
 
   if (loading) return <p>로딩중....</p>;
