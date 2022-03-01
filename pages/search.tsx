@@ -11,6 +11,7 @@ import Layout from '../components/Layout';
 import useSearchInfiniteFetchData from '../hooks/useSearchInfiniteFetchData';
 
 import ResultSummary from '../components/search/ResultSummary';
+import SearchResult from '../components/search/SearchResult';
 
 
 export default function Search () {
@@ -23,9 +24,10 @@ export default function Search () {
   const {data: tvData, error: tvError, loading: tvLoading, setSize: tvSetSize, size: tvSize, initialLoading: tvInitialLoading} = useSearchInfiniteFetchData({category: 'tv', query : query})
   const {data: personData, error: personError, loading: personLoading, setSize: personSetSize, size: personSize, initialLoading: personInitialLoading} = useSearchInfiniteFetchData({category: 'person', query : query})
 
-  const loading = movieInitialLoading || tvInitialLoading || personInitialLoading
+  const initialLoading = movieInitialLoading || tvInitialLoading || personInitialLoading
 
-  console.log(movieData, movieError, movieLoading)
+  const loading = movieLoading || tvLoading || personLoading
+
   return (
     <div>
       <Head>
@@ -55,14 +57,14 @@ export default function Search () {
             </div>
             <div>
               <div className="mt-2 my-5 mobile:flex-row mobile:flex mobile:my-0">
-                {loading ? null : <ResultSummary movieData={movieData} personData={personData} tvData={tvData} currentSection={currentSection} handleCurrentSection={setCurrentSection} />}
+                {initialLoading ? null : <ResultSummary movieData={movieData} personData={personData} tvData={tvData} currentSection={currentSection} handleCurrentSection={setCurrentSection} />}
               </div>
             </div>
           </div>
         </div>
-        {/* <div className="w-8/12 mobile:w-full mobile:px-5">
-          <Result />
-        </div> */}
+        <div className="w-8/12 mobile:w-full mobile:px-5">
+          <SearchResult currentSection={currentSection} tvData={tvData} movieData={movieData} personData={personData} movieCurrentPage={movieSize} movieSetCurrentPage={movieSetSize} tvCurrentPage={tvSize} tvSetCurrentPage={tvSetSize} personCurrentPage={personSize} personSetCurrentPage={personSetSize} loading={loading}/>
+        </div>
       </div>
     </div>
   );
