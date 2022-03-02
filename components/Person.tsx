@@ -22,8 +22,10 @@ export default function Person({ person } : Props) {
     : 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg';
   return (
     <div className="border border-gray-300 shadow-sm w-person my-5 h-person mobile:w-40">
-      <Link href={`/person/${id}`} passHref>
+      <Link href={`/person/${id}`}>
+        <a>
         <Image objectFit="cover" width="235" height="235" src={profile} alt={name} />
+        </a>
       </Link>
       <div className="m-2">
         <Link href={`/person/${id}`} passHref>

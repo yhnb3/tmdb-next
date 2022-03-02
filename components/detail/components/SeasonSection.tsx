@@ -32,7 +32,8 @@ export default function SeasonSection({ content } : Props) {
   }
   return (
     <div className="flex mt-5 border-gray-300 border rounded-lg">
-      <Link href={pathUrl} passHref>
+      <Link href={pathUrl}>
+        <a>
         <Image
           width={146.2}
           height={225}
@@ -40,6 +41,7 @@ export default function SeasonSection({ content } : Props) {
           src={posterUrl}
           alt=""
         />
+        </a>
       </Link>
       <div className="grid grid-cols-1 p-5 gap-4 w-11/12">
         <div className="grid grid cols-1">
