@@ -16,7 +16,7 @@ export default function Detail(){
   const endPoint = `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko`;
   const {data, error, loading} = useFetchData({endPoint})
 
-  // if (loading) return <p>로딩중</p>
+  if (loading) return <p>로딩중</p>
   
   // return <PersonDetail person={data} />
   return <p>{data.name}</p>
