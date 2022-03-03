@@ -1,45 +1,46 @@
 import * as React from "react";
 
-import Rate from "../Rate";
-import { ImportantCrew, RecommendationSection } from "./section";
-import MobileCastList from "./section/MobileCastList.tsx";
+// import Rate from "../Rate";
+// import { ImportantCrew, RecommendationSection } from "./section";
+// import MobileCastList from "./section/MobileCastList.tsx";
 
 export default function mobileDetail({ content }) {
-  console.log(content);
-  const section = content.title ? "movie" : "tv";
-  const backDropUrl = `https://image.tmdb.org/t/p/original/${content.backdrop_path}`;
-  const posterUrl = `https://image.tmdb.org/t/p/w300/${content.poster_path}`;
-  const date = content.title ? content.release_date : content.first_air_date;
-  const runtime = {
-    hour: parseInt(content.runtime / 60, 10),
-    minute: content.runtime % 60,
-  };
+  // console.log(content);
+  // const section = content.title ? "movie" : "tv";
+  // const backDropUrl = `https://image.tmdb.org/t/p/original/${content.backdrop_path}`;
+  // const posterUrl = `https://image.tmdb.org/t/p/w300/${content.poster_path}`;
+  // const date = content.title ? content.release_date : content.first_air_date;
+  // const runtime = {
+  //   hour: parseInt(content.runtime / 60, 10),
+  //   minute: content.runtime % 60,
+  // };
 
-  const renderGenre = () => {
-    const { genres } = content || [];
-    const genreString = genres.map((genre) => genre.name).join(", ");
-    return <span className="mx-1">{genreString}</span>;
-  };
+  // const renderGenre = () => {
+  //   const { genres } = content || [];
+  //   const genreString = genres.map((genre) => genre.name).join(", ");
+  //   return <span className="mx-1">{genreString}</span>;
+  // };
 
-  const renderDate = () => (
-    <div>
-      <span>
-        {date.substring(0, 4)}/{date.substring(5, 7)}/{date.substring(8, 10)}
-        (KR)
-      </span>
-      {content.title ? (
-        <span className="px-2">
-          {runtime.hour}h {runtime.minute}m
-        </span>
-      ) : (
-        <span className="px-2">{content.episode_run_time[0]}m</span>
-      )}
-    </div>
-  );
+  // const renderDate = () => (
+  //   <div>
+  //     <span>
+  //       {date.substring(0, 4)}/{date.substring(5, 7)}/{date.substring(8, 10)}
+  //       (KR)
+  //     </span>
+  //     {content.title ? (
+  //       <span className="px-2">
+  //         {runtime.hour}h {runtime.minute}m
+  //       </span>
+  //     ) : (
+  //       <span className="px-2">{content.episode_run_time[0]}m</span>
+  //     )}
+  //   </div>
+  // );
 
   return (
     <div>
-      <div className="h-40 relative">
+      <p>mobile</p>
+      {/* <div className="h-40 relative">
         <img
           className="h-40 w-full object-cover object-top"
           src={backDropUrl}
@@ -86,7 +87,7 @@ export default function mobileDetail({ content }) {
         </div>
         <MobileCastList id={content.id} section={section} />
         <RecommendationSection id={content.id} section={section} />
-      </div>
+      </div> */}
     </div>
   );
 }
