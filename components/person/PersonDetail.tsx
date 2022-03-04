@@ -11,11 +11,14 @@ export default function PersonDetail({ person } : Props) {
   return (
     <div className="flex flex-row mt-10 mobile:px-0 mobile:w-full">
       <div className="flex flex-col min-w-personImg ">
-        <Image
-          className="w-80 object-cover rounded-md shadow-lg"
-          src={`https://image.tmdb.org/t/p/w300/${person.profile_path}`}
-          alt={person.name}
-        />
+          <Image
+            width={300}
+            height={450}
+            objectFit='cover'
+            className="rounded-md shadow-lg"
+            src={`https://image.tmdb.org/t/p/w300/${person.profile_path}`}
+            alt={person.name}
+          />
         <PersonInfo person={person} />
       </div>
       <div className="flex flex-col pl-10 w-8/12">

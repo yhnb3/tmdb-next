@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function PersonInfo ({person}: Props) {
-  const endPoint = `https://api.themoviedb.org/3/person/${person.id}/external_ids?api_key=${process.env.REACT_APP_API_CODE}&language=ko`;
+  const endPoint = `https://api.themoviedb.org/3/person/${person.id}/external_ids?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko`;
   const { loading, error, data } = useFetchData({ endPoint });
 
   if (loading) return <p>로딩중.....</p>;

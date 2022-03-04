@@ -18,14 +18,15 @@ export default function Detail(){
 
   if (loading) return <p>로딩중</p>
   
-  // return <PersonDetail person={data} />
-  return <p>{data.name}</p>
+  return <PersonDetail person={data} />
 }
 
 Detail.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
+      <div className="w-screen mx-auto">
       {page}
+      </div>
     </Layout>
   )
 }
