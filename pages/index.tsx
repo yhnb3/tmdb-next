@@ -1,32 +1,11 @@
 import type { ReactElement } from 'react'
-import * as React from "react";
 import Head from "next/head";
+import { GetStaticProps } from 'next/types';
 
 import Layout from '../components/Layout';
 import SectionList from '../components/home/SectionList'
 
-const sectionList = [
-  {
-    name: "populars",
-    title: "What's popular?",
-    target: "상영중",
-    urls: {
-      상영중: `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko&page=1`,
-      TV: `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko&page=1`,
-    },
-  },
-  {
-    name: "trending",
-    title: "트렌딩",
-    target: "오늘",
-    urls: {
-      오늘: `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko`,
-      이번주: `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko`,
-    },
-  },
-];
-
-export default function Home() {
+export default function Home({sectionList}) {
   return (
   <div className="mx-auto w-screen mobile:mx-0 mobile:w-full">
     <div className="flex h-80 w-full bg-blue-200">
@@ -58,6 +37,50 @@ export default function Home() {
     <SectionList  sectionList={sectionList} />
   </div>
   );
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const urls = [
+    `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko&page=1`,
+    `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko&page=1`,
+    `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko`,
+    `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko`,
+  ]
+  const promises = await urls.map( async (url) => {
+    const res = await fetch(url)
+    return await res.json()
+  })
+
+  const datas = await Promise.all(promises)
+
+  const sectionList = [
+    {
+      name: "populars",
+      title: "What's popular?",
+      target: "상영중",
+      datas: {
+        상영중: datas[0],
+        TV: datas[1],
+      },
+    },
+    {
+      name: "trending",
+      title: "트렌딩",
+      target: "오늘",
+      datas: {
+        오늘: datas[2],
+        이번주: datas[3],
+      },
+    },
+  ];
+
+
+  return {
+    props: {
+      sectionList,
+    },
+    revalidate: 60 * 60 * 24,
+  }
 }
 
 

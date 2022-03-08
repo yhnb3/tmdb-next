@@ -10,33 +10,33 @@ interface Props {
   name: string,
   title: string,
   target: string,
-  urls: {
-    상영중: string,
-    TV: string
+  datas: {
+    상영중: any,
+    TV: any
   } | {
-    오늘: string,
-    이번주: string
+    오늘: any,
+    이번주: any
   },
   categories: Array<string>,
 }
 
 const ContentListContainer = ({
-  urls,
+  datas,
   target,
   categories,
   title,
 }: Props) => {
   const [currentCategory, setCurrentCategory] = useState(target);
 
-  const { loading, error, data } = useFetchData({
-    endPoint: urls[currentCategory],
-  });
+  // const { loading, error, data } = useFetchData({
+  //   endPoint: urls[currentCategory],
+  // });
 
   const categoryChange = (section:string) => {
     setCurrentCategory(section);
   };
   
-  if (error) return <p>에러가 발생하였습니다. </p>;
+  // if (error) return <p>에러가 발생하였습니다. </p>;
   return (
     <div>
       <div className="flex flex-row my-3 px-5">
@@ -49,7 +49,7 @@ const ContentListContainer = ({
           categoryChange={categoryChange}
         />
       </div>
-      { loading ? <Loading /> : <Slide Component={Poster} contents={data.results} />}
+      <Slide Component={Poster} contents={datas[currentCategory].results} />
     </div>
   );
 }

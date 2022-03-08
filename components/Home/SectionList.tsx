@@ -5,12 +5,12 @@ interface Section {
   name: string,
   title: string,
   target: string,
-  urls: {
-    상영중: string,
-    TV: string
+  datas: {
+    상영중: any,
+    TV: any
   } | {
-    오늘: string,
-    이번주: string
+    오늘: any,
+    이번주: any
   }
 }
 
@@ -25,9 +25,9 @@ const SectionList = ({ sectionList } : Props) => (
         key={sectionItem.name}
         target={sectionItem.target}
         title={sectionItem.title}
-        urls={sectionItem.urls}
+        datas={sectionItem.datas}
         name={sectionItem.name}
-        categories={Object.keys(sectionItem.urls)}
+        categories={Object.keys(sectionItem.datas)}
       />
     ))}
   </div>
