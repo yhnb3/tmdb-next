@@ -5,7 +5,7 @@ import { GetStaticProps } from 'next/types';
 import Layout from '../components/Layout';
 import SectionList from '../components/home/SectionList'
 
-export default function Home({sectionList}) {
+export default function Home({data}) {
   return (
   <div className="mx-auto w-screen mobile:mx-0 mobile:w-full">
     <div className="flex h-80 w-full bg-blue-200">
@@ -34,7 +34,7 @@ export default function Home({sectionList}) {
         </div>
       </div>
     </div>
-    <SectionList  sectionList={sectionList} />
+    <SectionList  sectionList={data} />
   </div>
   );
 }
@@ -53,7 +53,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const datas = await Promise.all(promises)
 
-  const sectionList = [
+  const data = [
     {
       name: "populars",
       title: "What's popular?",
@@ -77,7 +77,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      sectionList,
+      data,
     },
     revalidate: 60 * 60 * 24,
   }
