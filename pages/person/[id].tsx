@@ -1,24 +1,15 @@
 import type { ReactElement } from 'react'
 import { GetServerSideProps } from 'next/types';
-import { useRouter } from 'next/router'
-
-import Layout from '../../components/Layout';
-import useFetchData from '../../hooks/useFetchData';
-
-import PersonDetail from '../../components/person/PersonDetail';
 import axios from 'axios';
+
 import Head from 'next/head';
 
+import Layout from '../../components/Layout';
 
-export default function Detail({data}){
-  // console.log(sd)
-  // const router = useRouter()
-  // const { id } = router.query
-  // const endPoint = `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko`;
-  // const {data, error, loading} = useFetchData({endPoint})
+import PersonDetail from '../../components/person/PersonDetail';
 
-  // if (loading) return <p>로딩중</p>
-  
+
+export default function Detail({data}){ 
   return <>
     <Head>
       <title>{data.name}</title>
