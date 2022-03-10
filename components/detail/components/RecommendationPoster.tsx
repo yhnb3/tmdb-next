@@ -32,7 +32,7 @@ const RecommendationPoster : React.FC<Props> = ({content} : Props) => {
       
     </Link>
     <div className="flex justify-between mb-2 w-sm_backdrop">
-      <p className="line-clamp-1 max-h-6 text-sm  w-10/12">
+      <p className="text-sm  w-10/12 line-clamp-1">
         {content.name || content.title}
       </p>
       <p>{`${Math.round(content.vote_average * 10)}%`}</p>

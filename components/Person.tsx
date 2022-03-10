@@ -29,7 +29,7 @@ export default function Person({ person } : Props) {
       </Link>
       <div className="m-2">
         <Link href={`/person/${id}`} passHref>
-          <p className="font-bold">{name}</p>
+          <p className="font-bold line-clamp-1">{name}</p>
         </Link>
         <p className="font-extralight line-clamp-1">{getKnownFor(known_for)}</p>
       </div>

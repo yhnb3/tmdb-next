@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Link from 'next/Link';
+import Link from 'next/link';
 
 interface Menu {
   name: string,
@@ -24,8 +24,9 @@ export default function DropMenu({ category, menus, isVisible } : Props) {
         <div key={element.name} className="my-2 mx-2 w-full cursor-pointer">
           <Link
             href={`/${category}/${element.url}`}
+            passHref
           >
-            <p>{element.name}</p>
+            <a><p>{element.name}</p></a>
           </Link>
         </div>
       ))}
