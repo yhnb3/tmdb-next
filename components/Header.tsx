@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Link from 'next/Link';
+import Link from 'next/link';
 
 import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu';
 
@@ -78,13 +78,15 @@ const Header : React.FC<props> = ({ handleSide } : props) => {
         <button type="button" onClick={() => handleSide()}>
           <GiHamburgerMenu className="w-20 h-8 text-white hidden mobile:block" />
         </button>
-        <Link href="/">
+        <Link href="/" passHref>
+          <a>
           <button
             className="mr-12 font-bold text-white text-xl mobile:mx-6"
             type="button"
           >
             HOME
           </button>
+          </a>
         </Link>
         <div className="hidden mobile:block w-20" />
         <HeaderBtn showMenu={showMenu} hideMenu={hideMenu} menus={movieMenus} isVisible={movieIsVisible} category='movie' name='영화' />
