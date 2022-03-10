@@ -3,7 +3,7 @@ import Head from "next/head";
 import { GetStaticProps } from 'next/types';
 
 import Layout from '../components/Layout';
-import SectionList from '../components/home/SectionList'
+import SectionList from '../components/homepage/SectionList'
 
 export default function Home({data}) {
   return (
