@@ -28,7 +28,6 @@ export default function KnowFor({ id, department } : Props) {
   
   
   function Poster ({content} : {content: Content}){
-    console.log(`https://image.tmdb.org/t/p/w300/${content.poster_path}`)
     return (
     <Link  href={`/${content.title ? 'movie' : 'tv'}/${content.id}`}>
       <a>

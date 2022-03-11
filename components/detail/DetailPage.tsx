@@ -5,10 +5,11 @@ import ContentDetail from './ContentDetail'
 import {Content} from './types'
 
 interface Props {
-  content: Content
+  content: Content,
+  isMobile: boolean,
 }
 
-const DetailPage = ({content} : Props) =>{
+const DetailPage = ({content, isMobile} : Props) =>{
   const title = content.title || content.name
   const section = content.title ? "movie" : "tv"
   // if (typeof window !== "undefined" && window.innerWidth <= 500) return <ContentMobileDetail content={data} />;
@@ -17,7 +18,8 @@ const DetailPage = ({content} : Props) =>{
       <title>{title}</title>
       <meta name="description" content="Helmet application" />
     </Head>
-    <ContentDetail content={content} section={section}/>;
+    {/* {isMobile? <ContentMobileDetail content={content} section={section} /> : <ContentDetail content={content} section={section}/>} */}
+    <ContentDetail content={content} section={section}/>
   </>
 }
 

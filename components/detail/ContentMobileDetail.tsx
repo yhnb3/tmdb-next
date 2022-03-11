@@ -1,53 +1,66 @@
-import * as React from "react";
+import Image from 'next/image'
 
-// import Rate from "../Rate";
-// import { ImportantCrew, RecommendationSection } from "./section";
-// import MobileCastList from "./section/MobileCastList.tsx";
+import Rate from "../Rate";
+import { RecommendationSection, MobileCastList, ImportantCrew } from "./components";
 
-export default function mobileDetail({ content }) {
-  // console.log(content);
-  // const section = content.title ? "movie" : "tv";
-  // const backDropUrl = `https://image.tmdb.org/t/p/original/${content.backdrop_path}`;
-  // const posterUrl = `https://image.tmdb.org/t/p/w300/${content.poster_path}`;
-  // const date = content.title ? content.release_date : content.first_air_date;
-  // const runtime = {
-  //   hour: parseInt(content.runtime / 60, 10),
-  //   minute: content.runtime % 60,
-  // };
+import useFetchData from '../../hooks/useFetchData'
 
-  // const renderGenre = () => {
-  //   const { genres } = content || [];
-  //   const genreString = genres.map((genre) => genre.name).join(", ");
-  //   return <span className="mx-1">{genreString}</span>;
-  // };
+import {Content} from './types'
 
-  // const renderDate = () => (
-  //   <div>
-  //     <span>
-  //       {date.substring(0, 4)}/{date.substring(5, 7)}/{date.substring(8, 10)}
-  //       (KR)
-  //     </span>
-  //     {content.title ? (
-  //       <span className="px-2">
-  //         {runtime.hour}h {runtime.minute}m
-  //       </span>
-  //     ) : (
-  //       <span className="px-2">{content.episode_run_time[0]}m</span>
-  //     )}
-  //   </div>
-  // );
+interface Props {
+  content: Content
+}
+
+export default function MobileDetail({ content } : Props) {
+  const section = content.title ? "movie" : "tv";
+  const backDropUrl = `https://image.tmdb.org/t/p/original/${content.backdrop_path}`;
+  const posterUrl = `https://image.tmdb.org/t/p/w300/${content.poster_path}`;
+  const date = content.title ? content.release_date : content.first_air_date;
+
+  const endPoint = `https://api.themoviedb.org/3/${section}/${content.id}/credits?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko`
+  const { data } = useFetchData({endPoint})
+  const runtime = {
+    hour: (content.runtime / 60).toString(),
+    minute: content.runtime % 60,
+  };
+
+  const renderGenre = () => {
+    const genres = content.genres || [];
+    const genreString = genres.map((genre : {name: string}) => genre.name).join(", ");
+    return <span className="mx-1">{genreString}</span>;
+  };
+
+  const renderDate = () => (
+    <div>
+      <span>
+        {date.substring(0, 4)}/{date.substring(5, 7)}/{date.substring(8, 10)}
+        (KR)
+      </span>
+      {content.title ? (
+        <span className="px-2">
+          {`${parseInt(runtime.hour, 10)}h ${runtime.minute}m`}
+        </span>
+      ) : (
+        <span className="px-2">{content.episode_run_time[0]}m</span>
+      )}
+    </div>
+  );
 
   return (
     <div>
       <p>mobile</p>
-      {/* <div className="h-40 relative">
-        <img
+      <div className="h-40 relative">
+        <Image
+          width={100}
+          height={100}
           className="h-40 w-full object-cover object-top"
           src={backDropUrl}
           alt={content.title || content.name}
         />
         <div className="absolute h-40 inset-y-0 left-0 px-4 py-4 bg-gradient-to-r from-blackOp100 via-blackOp100 to-blackOp0">
-          <img
+          <Image
+            width={100}
+            height={100}
             className="h-32 object-cover rounded-md"
             src={posterUrl}
             alt={content.title || content.name}
@@ -63,7 +76,7 @@ export default function mobileDetail({ content }) {
             </span>
           </div>
           <div className="flex flex-row p-4">
-            <Rate score={content.vote_average} times="1" />
+            <Rate score={content.vote_average} times={1} />
             <span className="text-white text-sm font-bold align-middle p-2">
               회원점수
             </span>
@@ -83,11 +96,11 @@ export default function mobileDetail({ content }) {
               </p>
             </div>
           </div>
-          <ImportantCrew id={content.id} section={section} />
+          <ImportantCrew credit={data}/>
         </div>
-        <MobileCastList id={content.id} section={section} />
+        <MobileCastList credit={data} />
         <RecommendationSection id={content.id} section={section} />
-      </div> */}
+      </div>
     </div>
   );
 }

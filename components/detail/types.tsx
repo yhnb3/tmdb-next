@@ -12,4 +12,6 @@ export interface Content {
   vote_average: number,
   tagline: string,
   overview: string,
+  runtime?: number,
+  episode_run_time: Array<string>,
 }
