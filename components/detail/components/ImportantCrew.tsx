@@ -1,5 +1,6 @@
 interface Props {
-  credit: Credit
+  credit: Credit,
+  loading: boolean,
 }
 
 interface Credit {
@@ -12,7 +13,8 @@ interface Crew {
   job: string,
 }
 
-export default function ImportantCrew({ credit }: Props) {
+export default function ImportantCrew({ credit, loading }: Props) {
+  if (loading) return <p>로딩중</p>
   const canBe = credit.crew.filter(
     (person : Crew) =>
       person.department === 'Writing' || person.department === 'Production',

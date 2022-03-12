@@ -14,7 +14,7 @@ const RecommendationSection: React.FC<Props> = ({ id, section } : Props) => {
   
   if(loading) return <p>로딩중...</p>
   if(error) return <p>에러가 발생하였습니다.</p>
-
+  console.log(data.results)
   return (
     <div>
       <p className="text-xl font-bold m-2">추천</p>

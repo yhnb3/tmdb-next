@@ -18,7 +18,7 @@ export default function MobileDetail({ content } : Props) {
   const date = content.title ? content.release_date : content.first_air_date;
 
   const endPoint = `https://api.themoviedb.org/3/${section}/${content.id}/credits?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko`
-  const { data } = useFetchData({endPoint})
+  const { loading, data } = useFetchData({endPoint})
   const runtime = {
     hour: (content.runtime / 60).toString(),
     minute: content.runtime % 60,
@@ -47,21 +47,21 @@ export default function MobileDetail({ content } : Props) {
   );
 
   return (
-    <div>
-      <p>mobile</p>
+    <div className='mt-10'>
       <div className="h-40 relative">
-        <Image
-          width={100}
-          height={100}
-          className="h-40 w-full object-cover object-top"
-          src={backDropUrl}
-          alt={content.title || content.name}
-        />
+        <div className='w-full h-40'>
+          <Image
+            layout='fill'
+            className="object-cover object-top"
+            src={backDropUrl}
+            alt={content.title || content.name}
+          />
+        </div>
         <div className="absolute h-40 inset-y-0 left-0 px-4 py-4 bg-gradient-to-r from-blackOp100 via-blackOp100 to-blackOp0">
           <Image
-            width={100}
-            height={100}
-            className="h-32 object-cover rounded-md"
+            width={85}
+            height={128}
+            className="object-cover rounded-md"
             src={posterUrl}
             alt={content.title || content.name}
           />
@@ -75,11 +75,13 @@ export default function MobileDetail({ content } : Props) {
               ({date.substring(0, 4)})
             </span>
           </div>
-          <div className="flex flex-row p-4">
-            <Rate score={content.vote_average} times={1} />
+          <div className="flex flex-row p-2 mx-24">
             <span className="text-white text-sm font-bold align-middle p-2">
               회원점수
             </span>
+            <div className='relative'>
+              <Rate score={content.vote_average} times={1} right={2} />
+            </div>
           </div>
           <div className="border-t border-b border-black px-auto text-center text-sm p-2">
             {renderDate()}
@@ -96,9 +98,9 @@ export default function MobileDetail({ content } : Props) {
               </p>
             </div>
           </div>
-          <ImportantCrew credit={data}/>
+          <ImportantCrew credit={data} loading={loading}/>
         </div>
-        <MobileCastList credit={data} />
+        <MobileCastList credit={data} loading={loading}/>
         <RecommendationSection id={content.id} section={section} />
       </div>
     </div>

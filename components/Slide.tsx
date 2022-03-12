@@ -27,7 +27,7 @@ const Slide : React.FC<Props> = ({Component, contents} : Props) => {
       onScroll={() => handleScroll()}
     >
       {contents.map((content) => (
-        <div className="inline-flex px-5 py-2" key={content.id}>
+        <div className="inline-flex px-5" key={content.id}>
           <Component content={content} />
         </div>
       ))}

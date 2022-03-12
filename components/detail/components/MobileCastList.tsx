@@ -1,10 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-import useFetchData from '../../../hooks/useFetchData'
-
 interface Props {
-  credit: Credit
+  credit: Credit,
+  loading: boolean,
 }
 
 interface Credit {
@@ -26,7 +25,8 @@ interface Cast {
   character: string
 }
 
-const MobileCastList : React.FC<Props> = ({credit}: Props) => {
+const MobileCastList : React.FC<Props> = ({credit, loading}: Props) => {
+  if(loading) return <p>로딩중</p>
   return (
     <div className="my-5">
       <p className="font-bold text-xl m-2">주요 출연진</p>
@@ -41,8 +41,8 @@ const MobileCastList : React.FC<Props> = ({credit}: Props) => {
                 <Link href={`/person/${element.id}`} passHref>
                   <a>
                   <Image
-                    width={40}
-                    height={40}
+                    width={126}
+                    height={144}
                     objectFit='cover'
                     className="object-top rounded-lg"
                     src={`https://image.tmdb.org/t/p/original/${element.profile_path}`}

@@ -49,7 +49,10 @@ const Poster = ({ content} : Props) => {
             </div>
           </a>
         </Link>
-        <Rate score={content.vote_average} times={1}/>
+        <div className='absolute w-10 h-10 -bottom-4 left-1'>
+          <Rate score={content.vote_average} times={1}/>
+        </div>
+        
       </div>
       <div className="mt-4">
           <p className="text-md font-bold whitespace-normal">{title}</p>

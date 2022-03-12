@@ -22,7 +22,7 @@ export default function MobileSide({ sideVisible, handleSide } : Props) {
   return (
     <div
       className={`fixed visible top-20 w-80 min-h-screen z-50 bg-blue-800 opacity-95 ${
-        sideVisible === undefined
+        typeof sideVisible === 'undefined'
           ? '-left-80'
           : sideVisible
           ? 'animate-show-side left-0'
