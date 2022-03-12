@@ -8,6 +8,7 @@ interface withContentsPageProps {
   section: string,
   category: string,
   head_line: string,
+  isMobile: boolean,
 } 
 
 const withContentsPage = <P extends object>(Component: React.ComponentType<P>) => {

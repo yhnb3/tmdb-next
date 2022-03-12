@@ -16,8 +16,9 @@ interface Content {
 }
 
 
-const SectionContents = ({data}) => {
-  if (typeof window !== "undefined" && window.innerWidth <= 500) {
+
+const SectionContents = ({data, isMobile}) => {
+  if (isMobile) {
     return data.map((contents : { results : Array<Content>}) =>
       contents.results.map((element) => <SearchContent key={element.id} content={element} />),
     );

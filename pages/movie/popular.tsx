@@ -1,13 +1,24 @@
 import type { ReactElement } from 'react'
-import * as React from "react";
+import { GetServerSideProps } from 'next/types';
 import Head from "next/head";
 
 import Layout from '../../components/Layout';
 
 import SectionContents from '../../components/content/SectionContents';
+import isMobile from '../../libs/isMobile';
 
-export default function Popular() {
-  return <SectionContents section="popular" category="movie" head_line="인기 영화" />
+
+export default function Popular({isMobileDevice}) {
+  return <SectionContents section="popular" category="movie" head_line="인기 영화" isMobile={isMobileDevice}/>
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const isMobileDevice = isMobile(context.req)
+  return {
+    props: {
+      isMobileDevice,
+    }
+  }
 }
 
 Popular.getLayout = function getLayout(page: ReactElement) {

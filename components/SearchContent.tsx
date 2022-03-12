@@ -43,18 +43,25 @@ const SearchContent = ({ content } : Props) => {
   return (
     <div className="flex mt-10 border-gray-300 border rounded-md w-6/8 mobile:mt-5">
       <Link href={pathUrl} passHref>
+        <a>
         <Image
+          height={144}
+          width={96}
           className="rounded-l-md object-cover w-img h-full mobile:w-auto mobile:h-36"
           src={posterUrl}
           alt=""
         />
+        </a>
+        
       </Link>
       <div className="grid grid-cols-1 p-5 gap-4 w-11/12 mobile:w-8/12 mobile:py-5 mobile:px-3">
         <div className="grid grid cols-1">
           <Link href={pathUrl} passHref>
+            <a>
             <p className="text-2xl align-middle mobile:text-base mobile:font-bold">
               {title}
             </p>
+            </a>
           </Link>
           <p className="text-xl text-gray-400 align-middle mobile:text-sm">
             {handlingDate}
