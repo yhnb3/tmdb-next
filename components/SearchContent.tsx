@@ -32,7 +32,7 @@ const SearchContent = ({ content } : Props) => {
     : '미정';
 
   const overviewRender = () => (
-    <p className="max-h-12 overflow-ellipsis overflow-hidden line-clamp-2 mobile:text-sm">
+    <p className="text-sm max-h-10 overflow-ellipsis overflow-hidden line-clamp-2">
       {content.overview}
     </p>
   );
@@ -41,29 +41,30 @@ const SearchContent = ({ content } : Props) => {
     return <></>;
   }
   return (
-    <div className="flex mt-10 border-gray-300 border rounded-md w-6/8 mobile:mt-5">
+    <div className="flex mt-5 border-gray-300 border rounded-md w-6/8">
       <Link href={pathUrl} passHref>
         <a>
         <Image
           height={144}
           width={96}
-          className="rounded-l-md object-cover w-img h-full mobile:w-auto mobile:h-36"
+          objectFit="cover"
+          className="rounded-l-md"
           src={posterUrl}
           alt=""
         />
         </a>
         
       </Link>
-      <div className="grid grid-cols-1 p-5 gap-4 w-11/12 mobile:w-8/12 mobile:py-5 mobile:px-3">
+      <div className="grid grid-cols-1 gap-4 w-8/12 py-5 px-3">
         <div className="grid grid cols-1">
           <Link href={pathUrl} passHref>
             <a>
-            <p className="text-2xl align-middle mobile:text-base mobile:font-bold">
+            <p className="align-middle text-base font-bold">
               {title}
             </p>
             </a>
           </Link>
-          <p className="text-xl text-gray-400 align-middle mobile:text-sm">
+          <p className="text-gray-400 align-middle text-sm">
             {handlingDate}
           </p>
         </div>

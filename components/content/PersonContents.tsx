@@ -11,9 +11,9 @@ interface Person {
 }
 
 
-const PersonContents = ({data}) => {
+const PersonContents = ({data, isMobile}) => {
   return data.map((element : {page:number, results : Array<Person>}) => (
-    <PersonList key={element.page} persons={element.results} />
+    <PersonList key={element.page} persons={element.results} isMobile={isMobile}/>
   ))
 }
 

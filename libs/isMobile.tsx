@@ -8,7 +8,6 @@ export default function isMobile(req?) {
     } else { // check only on clientside no request present
         userAgent = new Parser().getResult();
     }
-
-    console.log(userAgent, 'userAgent');
+    
     return userAgent?.device?.type === 'mobile';
 }

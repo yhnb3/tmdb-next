@@ -1,6 +1,3 @@
-import * as React from 'react';
-import PersonLoading from './PersonLoading';
-
 import Person from './Person';
 
 interface Person {
@@ -12,11 +9,12 @@ interface Person {
 
 interface Props {
   persons: Array<Person>,
+  isMobile: boolean,
 }
 
-export default function personList({ persons } : Props) {
+export default function personList({ persons, isMobile } : Props) {
   return (
-    <div className="grid grid-cols-5 place-items-center mobile:grid-cols-2">
+    <div className="flex justify-between flex-wrap">
       {persons.map((element) => (
         <Person person={element} key={element.name} />
       ))}
