@@ -94,7 +94,7 @@ const SummarySection: React.FC<Props> = ({content} : Props) => {
           <></>
         )}
       </div>
-      <div className="flex flex-col w-2/3 px-5 text-white">
+      <div className="flex flex-col w-2/3 px-5 text-white justify-start">
         <div className="my-2">
           <div>
             <span className="text-3xl font-bold">{title}</span>{' '}
@@ -108,7 +108,7 @@ const SummarySection: React.FC<Props> = ({content} : Props) => {
             {renderGenre()}
           </div>
         </div>
-        <div className="h-16 bottom-8 relative"><Rate score={content.vote_average} times={1.5}/></div>
+        <div className="h-16 relative"><Rate score={content.vote_average} times={1.5}/></div>
         <p className="text-lg italic text-gray-400 my-2">
           {content.tagline}
         </p>
