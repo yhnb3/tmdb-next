@@ -47,13 +47,14 @@ interface Props {
   tvSetCurrentPage: (page: number) => void
   personSetCurrentPage: (page: number) => void
   loading: boolean
+  isMobile: boolean,
 }
 
 const SearchResult = ( props : Props) => {
   if (props.loading) return <p>로딩중...</p>
   if (props.currentSection === 'person') return <PersonResult persons={props.personData} currentPage={props.personCurrentPage} handlePage={props.personSetCurrentPage}/>
-  if (props.currentSection === 'movie') return <ContentResult contents={props.movieData} currentPage={props.movieCurrentPage} handlePage={props.movieSetCurrentPage}/>
-  return <ContentResult contents={props.tvData} currentPage={props.tvCurrentPage} handlePage={props.tvSetCurrentPage}/>
+  if (props.currentSection === 'movie') return <ContentResult isMobile={props.isMobile} contents={props.movieData} currentPage={props.movieCurrentPage} handlePage={props.movieSetCurrentPage}/>
+  return <ContentResult isMobile={props.isMobile} contents={props.tvData} currentPage={props.tvCurrentPage} handlePage={props.tvSetCurrentPage}/>
 }
 
 export default SearchResult

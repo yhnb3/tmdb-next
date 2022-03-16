@@ -20,6 +20,7 @@ export default function Home({data}) {
           <form action="/search?" className="h-12 w-full">
             <input
               className="px-5 py-3 outline-none rounded-full w-10/12"
+              autoComplete="off"
               type="text"
               dir="auto"
               name="query"

@@ -1,10 +1,14 @@
 import type { ReactElement } from 'react'
-import * as React from "react";
+import {useState} from 'react'
+import { GetServerSideProps } from 'next/types';
 import Head from "next/head";
 import { useRouter } from 'next/router'
 
+import axios from 'axios';
+
+import isMobile from '../libs/isMobile';
+
 import { FaSearch } from '@react-icons/all-files/fa/FaSearch';
-import { BsDot } from '@react-icons/all-files/bs/BsDot';
 
 import Layout from '../components/Layout';
 
@@ -14,11 +18,12 @@ import ResultSummary from '../components/search/ResultSummary';
 import SearchResult from '../components/search/SearchResult';
 
 
-export default function Search () {
+export default function Search ({isMobileDevice}) {
   const router = useRouter()
   const { query } = router.query
   
-  const [currentSection, setCurrentSection] = React.useState('movie');
+  const [inputValue, setInputValue] = useState(query)
+  const [currentSection, setCurrentSection] = useState('movie');
 
   const {data: movieData, error: movieError, loading: movieLoading, setSize: movieSetSize, size: movieSize, initialLoading: movieInitialLoading} = useSearchInfiniteFetchData({category: 'movie', query : query})
   const {data: tvData, error: tvError, loading: tvLoading, setSize: tvSetSize, size: tvSize, initialLoading: tvInitialLoading} = useSearchInfiniteFetchData({category: 'tv', query : query})
@@ -44,7 +49,10 @@ export default function Search () {
               className="text-gray-400 h-full outline-none"
               type="text"
               name="query"
+              autoComplete="off"
               placeholder="영화, tv 프로그램 검색..."
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
             />
           </form>
         </div>
@@ -63,21 +71,29 @@ export default function Search () {
           </div>
         </div>
         <div className="w-8/12 mobile:w-full mobile:px-5">
-          <SearchResult currentSection={currentSection} tvData={tvData} movieData={movieData} personData={personData} movieCurrentPage={movieSize} movieSetCurrentPage={movieSetSize} tvCurrentPage={tvSize} tvSetCurrentPage={tvSetSize} personCurrentPage={personSize} personSetCurrentPage={personSetSize} loading={loading}/>
+          <SearchResult isMobile={isMobileDevice} currentSection={currentSection} tvData={tvData} movieData={movieData} personData={personData} movieCurrentPage={movieSize} movieSetCurrentPage={movieSetSize} tvCurrentPage={tvSize} tvSetCurrentPage={tvSetSize} personCurrentPage={personSize} personSetCurrentPage={personSetSize} loading={loading}/>
         </div>
       </div>
     </div>
   );
 }
 
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const isMobileDevice = isMobile(context.req)
+  return {
+    props: {
+      isMobileDevice,
+    }
+  }
+}
+
 Search.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
-      <Head>
-        <title>TMDB BY KANGWOO</title>
-        <meta name="description" content="Helmet application" />
-      </Head>
+      <div className='pt-10'>
       {page}
+      </div>
+
     </Layout>
   )
 }

@@ -13,12 +13,14 @@ interface Props {
 const MobileSide = dynamic(() => import('./MobileSide'))
 
 function Layout({children} : Props){
-  const [sideVisible, setSideVisible] = React.useState(undefined);
+  const [sideVisible, setSideVisible] = React.useState(false);
+  const [cnt, setCnt] = React.useState(0)
 
   const isMobileDevice = isMobile()
 
   const router= useRouter();
   const handleSide = () => {
+    setCnt(cnt+1)
     setSideVisible(!sideVisible);
   };
 
@@ -27,7 +29,7 @@ function Layout({children} : Props){
   return (
     <>
     <Header handleSide={handleSide}/>
-    {isMobileDevice ? <MobileSide handleSide={handleSide} sideVisible={sideVisible} /> : null}
+    {isMobileDevice ? <MobileSide handleSide={handleSide} count={cnt} sideVisible={sideVisible} /> : null}
     <main className='pt-20 pb-28 mobile:pt-10'>
       {children}
     </main>

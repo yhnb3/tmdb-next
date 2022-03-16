@@ -1,4 +1,5 @@
 import * as React from 'react'
+import SearchContent from '../SearchContent'
 import Content from './Content'
 import Pagination from './Pagination'
 
@@ -21,13 +22,14 @@ interface Props {
   contents : Array<ContentPage>,
   currentPage: number,
   handlePage: (page:number) => void
+  isMobile: boolean,
 }
 
-const ContentResult: React.FC<Props> = ({ contents, currentPage, handlePage } : Props) => {
+const ContentResult: React.FC<Props> = ({ contents, currentPage, handlePage, isMobile } : Props) => {
   console.log(contents)
   return <div>
       {contents[currentPage-1].results.map((element: Content) => (
-        <Content key={element.id} content={element} />
+        isMobile ? <SearchContent key={element.id} content={element}/> : <Content key={element.id} content={element} />
       ))}
       {contents[0].total_pages > 1 ? (
         <Pagination

@@ -53,16 +53,14 @@ export default function PersonResult ({persons, currentPage, handlePage} : Props
 
             <div className="flex flex-col justify-center ml-5">
               <p className="text-xl font-bold">{element.name}</p>
-              <div className="flex flex-row">
-                <p>{element.known_for_department}</p>
-                <div className="flex items-center">
-                  <BsDot />
-                </div>
+              <span>
+                <span>{element.known_for_department}</span>
+                <p className="line-clamp-1">
                 {element.known_for.map((content, idx) => {
                   const title = content.title || content.name;
                   return (
-                    <div key={title}>
                       <Link
+                        key={title}
                         href={
                           content.title
                             ? `/movie/${content.id}`
@@ -70,18 +68,19 @@ export default function PersonResult ({persons, currentPage, handlePage} : Props
                         }
                       >
                         {idx === element.known_for.length - 1 ? (
-                          <p>{title}</p>
+                          <span>{title}</span>
                         ) : (
-                          <p className="mr-2">
+                          <span className="mr-2">
                             {title}
                             {', '}
-                          </p>
+                          </span>
+    
                         )}
                       </Link>
-                    </div>
                   );
                 })}
-              </div>
+                </p>
+              </span>
             </div>
           </div>
         ))}

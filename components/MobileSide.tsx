@@ -1,19 +1,20 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 
 interface Props {
   sideVisible: boolean,
   handleSide: () => void,
+  count: number
 }
 
-export default function MobileSide({ sideVisible, handleSide } : Props) {
+export default function MobileSide({ sideVisible, handleSide, count } : Props) {
   const [subMenuVisible, setSubMenuVisible] = useState({
     movie: false,
     tv: false,
     person: false,
-  });
-
+  }); 
   const handleSubMenu = (category : string) => {
+    
     setSubMenuVisible({
       ...subMenuVisible,
       [category]: !subMenuVisible[category],
@@ -21,13 +22,7 @@ export default function MobileSide({ sideVisible, handleSide } : Props) {
   };
   return (
     <div
-      className={`fixed visible top-20 w-80 min-h-screen z-50 bg-blue-800 opacity-95 ${
-        typeof sideVisible === 'undefined'
-          ? '-left-80'
-          : sideVisible
-          ? 'animate-show-side left-0'
-          : 'animate-hide-side -left-80'
-      }`}
+      className={`fixed visible top-20 w-80 min-h-screen z-50 bg-blue-800 opacity-95 ${count === 0 ? "-left-80" : sideVisible ? 'animate-show-side left-0' : 'animate-hide-side -left-80'}`}
     >
       <div className="flex flex-col text-white text-2xl  p-5 ">
         <button
