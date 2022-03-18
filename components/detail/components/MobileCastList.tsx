@@ -41,6 +41,8 @@ const MobileCastList : React.FC<Props> = ({credit, loading}: Props) => {
                 <Link href={`/person/${element.id}`} passHref>
                   <a>
                   <Image
+                    placeholder='blur'
+                    blurDataURL={`https://image.tmdb.org/t/p/original/${element.profile_path}`}
                     width={126}
                     height={144}
                     objectFit='cover'

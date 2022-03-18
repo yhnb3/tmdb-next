@@ -12,6 +12,8 @@ export default function PersonMobileDetail({ person } : Props) {
     <div className="flex flex-col pt-20 px-4 pb-24">
       <div className="mx-auto">
         <Image
+          placeholder='blur'
+          blurDataURL={`https://image.tmdb.org/t/p/w235_and_h235_face/${person.profile_path}`}
           width={200}
           height={200}
           objectFit='cover'

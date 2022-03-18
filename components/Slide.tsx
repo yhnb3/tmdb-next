@@ -6,7 +6,6 @@ interface Props {
 }
 
 const Slide : React.FC<Props> = ({Component, contents} : Props) => {
-  console.log(contents)
   const [isScrolling, setIsScrolling] = React.useState<boolean>(false);
 
   const scrollRef = React.useRef<HTMLInputElement>()
@@ -18,7 +17,6 @@ const Slide : React.FC<Props> = ({Component, contents} : Props) => {
       setIsScrolling(true);
     }
   };
-  console.log(contents)
   return (
   <div className="relative">
     <div

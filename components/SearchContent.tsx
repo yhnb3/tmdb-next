@@ -44,6 +44,8 @@ const SearchContent = ({ content } : Props) => {
       <Link href={pathUrl} passHref>
         <a>
         <Image
+          placeholder='blur'
+          blurDataURL={posterUrl}
           height={144}
           width={96}
           objectFit="cover"

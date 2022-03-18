@@ -41,6 +41,8 @@ const Poster = ({ content} : Props) => {
           <a>
             <div className='relative w-img h-full'>
               <Image
+                placeholder='blur'
+                blurDataURL={posterUrl}
                 layout='fill'
                 className="rounded-lg object-cover mx-auto"
                 src={posterUrl}

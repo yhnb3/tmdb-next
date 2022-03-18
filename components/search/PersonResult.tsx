@@ -41,6 +41,8 @@ export default function PersonResult ({persons, currentPage, handlePage} : Props
               <a>
                 <div className='w-20 h-20 relative'>
                   <Image
+                    placeholder='blur'
+                    blurDataURL={`https://image.tmdb.org/t/p/w300/${element.profile_path}`}
                     layout='fill'
                     className=" object-cover object-center rounded-md"
                     src={`https://image.tmdb.org/t/p/w300/${element.profile_path}`}

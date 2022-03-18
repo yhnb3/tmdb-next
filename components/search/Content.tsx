@@ -45,6 +45,8 @@ export default function searchContent({ content } : Props) {
         <a>
           <div className='relative w-img h-img'>
             <Image
+              placeholder='blur'
+              blurDataURL={posterUrl}
               layout='fill'
               className="rounded-l-md object-cover mobile:w-auto mobile:h-36"
               src={posterUrl}

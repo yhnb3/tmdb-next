@@ -1,10 +1,8 @@
-import type { ReactElement } from 'react'
+import { ReactElement, useEffect } from 'react'
 import {useState} from 'react'
 import { GetServerSideProps } from 'next/types';
 import Head from "next/head";
 import { useRouter } from 'next/router'
-
-import axios from 'axios';
 
 import isMobile from '../libs/isMobile';
 
@@ -21,10 +19,10 @@ import SearchResult from '../components/search/SearchResult';
 export default function Search ({isMobileDevice}) {
   const router = useRouter()
   const { query } = router.query
-  
+  console.log(1)
   const [inputValue, setInputValue] = useState(query)
   const [currentSection, setCurrentSection] = useState('movie');
-
+  
   const {data: movieData, error: movieError, loading: movieLoading, setSize: movieSetSize, size: movieSize, initialLoading: movieInitialLoading} = useSearchInfiniteFetchData({category: 'movie', query : query})
   const {data: tvData, error: tvError, loading: tvLoading, setSize: tvSetSize, size: tvSize, initialLoading: tvInitialLoading} = useSearchInfiniteFetchData({category: 'tv', query : query})
   const {data: personData, error: personError, loading: personLoading, setSize: personSetSize, size: personSize, initialLoading: personInitialLoading} = useSearchInfiniteFetchData({category: 'person', query : query})
@@ -32,6 +30,22 @@ export default function Search ({isMobileDevice}) {
   const initialLoading = movieInitialLoading || tvInitialLoading || personInitialLoading
 
   const loading = movieLoading || tvLoading || personLoading
+
+  useEffect(() => {
+    let section = 'movie'
+    if (!loading && movieData && tvData && personData) {
+      if (personData[0].results.length > 0) {
+        section = 'person'
+      }
+      if (tvData[0].results.length > 0) {
+        section = 'tv'
+      }
+      if (movieData[0].results.length > 0) {
+        section = 'movie'
+      }
+    }
+    setCurrentSection(section)
+  }, [loading])
 
   return (
     <div>
@@ -90,10 +104,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 Search.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
-      <div className='pt-10'>
       {page}
-      </div>
-
     </Layout>
   )
 }

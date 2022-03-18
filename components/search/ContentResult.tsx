@@ -26,8 +26,8 @@ interface Props {
 }
 
 const ContentResult: React.FC<Props> = ({ contents, currentPage, handlePage, isMobile } : Props) => {
-  console.log(contents)
-  return <div>
+  if (contents[0].results.length > 0) {
+    return <div>
       {contents[currentPage-1].results.map((element: Content) => (
         isMobile ? <SearchContent key={element.id} content={element}/> : <Content key={element.id} content={element} />
       ))}
@@ -40,6 +40,10 @@ const ContentResult: React.FC<Props> = ({ contents, currentPage, handlePage, isM
         <></>
       )}
     </div>
+  }
+  return <div className='mt-5'>
+    검색결과가 없습니다.
+  </div>
 }
     
 

@@ -13,12 +13,11 @@ const PersonDetail = dynamic(() => import('../../components/person/PersonDetail'
 const PersonMobileDetail = dynamic(() => import('../../components/person/PersonMobileDetail'))
 
 export default function Detail({data, isMobileDevice}){
-  console.log(isMobileDevice)
   return <>
     <Head>
       <title>{data.name}</title>
     </Head>
-    {isMobile ? <PersonMobileDetail person={data} /> :<PersonDetail person={data}/>}
+    {isMobileDevice ? <PersonMobileDetail person={data} /> :<PersonDetail person={data}/>}
   </>
 }
 

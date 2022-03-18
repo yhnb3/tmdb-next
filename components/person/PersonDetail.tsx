@@ -8,10 +8,13 @@ interface Props {
 }
 
 export default function PersonDetail({ person } : Props) {
+  console.log(1)
   return (
     <div className="flex flex-row mt-10 mobile:px-0 mobile:w-full w-screen mx-auto">
       <div className="flex flex-col min-w-personImg ">
           <Image
+            placeholder='blur'
+            blurDataURL={`https://image.tmdb.org/t/p/w300/${person.profile_path}`}
             width={300}
             height={450}
             objectFit='cover'

@@ -25,8 +25,6 @@ const ContentListContainer = ({
   title,
 }: Props) => {
   const [currentCategory, setCurrentCategory] = useState(target);
-
-  console.log(datas[currentCategory])
   const categoryChange = (section:string) => {
     setCurrentCategory(section);
   };

@@ -47,13 +47,12 @@ const SummarySection: React.FC<Props> = ({content} : Props) => {
         className="mr-4"
       >
         <Image
-        
-        className="rounded-md mx-2"
-        width={60}
-        height={60}
-        src={`https://www.themoviedb.org/t/p/original/${element.logo_path}`}
-        alt=""
-      />  
+          className="rounded-md mx-2"
+          width={60}
+          height={60}
+          src={`https://www.themoviedb.org/t/p/original/${element.logo_path}`}
+          alt=""
+        />  
       </div>
       
     ))}
@@ -75,7 +74,8 @@ const SummarySection: React.FC<Props> = ({content} : Props) => {
   <div className="relative h-poster">
   {content.backdrop_path ? (
     <Image
-      priority
+      placeholder='blur'
+      blurDataURL={backdropUrl}
       layout="fill"
       className="h-poster w-full object-cover object-top z-5 opacity-50"
       src={backdropUrl}
@@ -89,7 +89,15 @@ const SummarySection: React.FC<Props> = ({content} : Props) => {
     <div className="flex flex-row w-screen mx-auto">
       <div className="h-full">
         {content.poster_path ? (
-          <Image className="h-full rounded-lg" width={300} height={450} src={posterUrl} alt="" />
+          <Image 
+            placeholder='blur'
+            blurDataURL={posterUrl} 
+            className="h-full rounded-lg"
+            width={300} 
+            height={450} 
+            src={posterUrl} 
+            alt="" 
+          />
         ) : (
           <></>
         )}

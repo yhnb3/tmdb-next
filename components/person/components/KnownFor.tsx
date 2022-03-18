@@ -30,8 +30,10 @@ export default function KnowFor({ id, department } : Props) {
   function Poster ({content} : {content: Content}){
     return (
     <Link  href={`/${content.title ? 'movie' : 'tv'}/${content.id}`}>
-      <a>
+      <a className='py-2'>
         <Image
+          placeholder='blur'
+          blurDataURL={`https://image.tmdb.org/t/p/w300/${content.poster_path}`}
           width={130}
           height={195}
           objectFit='cover'

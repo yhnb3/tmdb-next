@@ -14,18 +14,19 @@ interface Props {
 
 const RecommendationPoster : React.FC<Props> = ({content} : Props) => {
   const section = content.title ? "movie" : "tv"
+  const backdropUrl = content.backdrop_path
+    ? `https://image.tmdb.org/t/p/original/${content.backdrop_path}`
+    : 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg'
   return <div>
     <Link href={`/${section}/${content.id}`}>
       <a>
       <Image
+        placeholder='blur'
+        blurDataURL={backdropUrl}
         className="object-cover rounded-md"
         width={250}
         height={141}
-        src={
-          content.backdrop_path
-            ? `https://image.tmdb.org/t/p/original/${content.backdrop_path}`
-            : 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg'
-        }
+        src={backdropUrl}
         alt={content.name || content.title}
       />
       </a>

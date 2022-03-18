@@ -11,8 +11,6 @@ const MediaSection: React.FC<Props> = ({id}: Props) => {
   
   if(loading) return <p>로딩중...</p>
   if(error) return <p>에러가 발생하였습니다.</p>
-
-  console.log(data)
   return (
   <div>
     <p className="font-bold text-xl m-2">미디어</p>

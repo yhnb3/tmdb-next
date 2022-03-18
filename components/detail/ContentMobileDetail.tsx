@@ -51,6 +51,8 @@ export default function MobileDetail({ content } : Props) {
       <div className="h-40 relative">
         <div className='w-full h-40'>
           <Image
+            placeholder='blur'
+            blurDataURL={backDropUrl}
             layout='fill'
             className="object-cover object-top"
             src={backDropUrl}
@@ -59,6 +61,8 @@ export default function MobileDetail({ content } : Props) {
         </div>
         <div className="absolute h-40 inset-y-0 left-0 px-4 py-4 bg-gradient-to-r from-blackOp100 via-blackOp100 to-blackOp0">
           <Image
+            placeholder='blur'
+            blurDataURL={posterUrl}
             width={85}
             height={128}
             className="object-cover rounded-md"

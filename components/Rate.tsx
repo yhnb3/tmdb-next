@@ -11,7 +11,6 @@ interface Props {
 }
 
 const Rate = ({score, times, bottom = 0, left = 0, top = 0, right = 0 } : Props) => {
-  console.log(bottom, top)
   let color = 'green';
 
   if (score < 7) {

@@ -35,6 +35,8 @@ export default function SeasonSection({ content } : Props) {
       <Link href={pathUrl}>
         <a>
         <Image
+          placeholder='blur'
+          blurDataURL={posterUrl}
           width={146.2}
           height={225}
           className="rounded-l-lg object-cover object-top"

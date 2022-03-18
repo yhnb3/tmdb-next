@@ -27,14 +27,14 @@ function Layout({children} : Props){
   React.useEffect(() => setSideVisible(false), [router])
 
   return (
-    <>
-    <Header handleSide={handleSide}/>
-    {isMobileDevice ? <MobileSide handleSide={handleSide} count={cnt} sideVisible={sideVisible} /> : null}
-    <main className='pt-20 pb-28 mobile:pt-10'>
-      {children}
-    </main>
-    <Footer />
-    </>
+    <div className='min-h-screen relative'>
+      <Header handleSide={handleSide}/>
+      {isMobileDevice ? <MobileSide handleSide={handleSide} count={cnt} sideVisible={sideVisible} /> : null}
+      <main className='pt-20 pb-28'>
+        {children}
+      </main>
+      <Footer />
+    </div>
     
   )
 }
