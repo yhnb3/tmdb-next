@@ -1,5 +1,6 @@
 import { ReactElement, useEffect } from 'react'
-import {useState} from 'react'
+
+import {useState, useCallback} from 'react'
 import { GetServerSideProps } from 'next/types';
 import Head from "next/head";
 import { useRouter } from 'next/router'
@@ -15,13 +16,24 @@ import useSearchInfiniteFetchData from '../hooks/useSearchInfiniteFetchData';
 import ResultSummary from '../components/search/ResultSummary';
 import SearchResult from '../components/search/SearchResult';
 
+import {useSelector, useDispatch} from 'react-redux';
+import {AppState} from '../app/store'
+import { changeSection } from './feature/search/searchSlice';
+
 
 export default function Search ({isMobileDevice}) {
   const router = useRouter()
   const { query } = router.query
-  console.log(1)
+
+  const {currentSection } = useSelector((state: AppState) => state.searchSlice)
+  const dispatch = useDispatch()
+
+  const setCurrentSection = useCallback(({ section }) => { 
+    dispatch(changeSection({ section })); 
+  }, [dispatch]);
+
+
   const [inputValue, setInputValue] = useState(query)
-  const [currentSection, setCurrentSection] = useState('movie');
   
   const {data: movieData, error: movieError, loading: movieLoading, setSize: movieSetSize, size: movieSize, initialLoading: movieInitialLoading} = useSearchInfiniteFetchData({category: 'movie', query : query})
   const {data: tvData, error: tvError, loading: tvLoading, setSize: tvSetSize, size: tvSize, initialLoading: tvInitialLoading} = useSearchInfiniteFetchData({category: 'tv', query : query})
@@ -32,19 +44,21 @@ export default function Search ({isMobileDevice}) {
   const loading = movieLoading || tvLoading || personLoading
 
   useEffect(() => {
-    let section = 'movie'
-    if (!loading && movieData && tvData && personData) {
-      if (personData[0].results.length > 0) {
-        section = 'person'
+    if (currentSection === "") {
+      let section = 'movie'
+      if (!loading && movieData && tvData && personData) {
+        if (personData[0].results.length > 0) {
+          section = 'person'
+        }
+        if (tvData[0].results.length > 0) {
+          section = 'tv'
+        }
+        if (movieData[0].results.length > 0) {
+          section = 'movie'
+        }
       }
-      if (tvData[0].results.length > 0) {
-        section = 'tv'
-      }
-      if (movieData[0].results.length > 0) {
-        section = 'movie'
-      }
+      setCurrentSection({section})
     }
-    setCurrentSection(section)
   }, [loading])
 
   return (

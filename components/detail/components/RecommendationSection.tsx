@@ -17,7 +17,7 @@ const RecommendationSection: React.FC<Props> = ({ id, section } : Props) => {
   return (
     <div>
       <p className="text-xl font-bold m-2">추천</p>
-      <Slide Component={RecomendationPoster} contents={data.results} />
+      {data.results.length > 0 ? <Slide Component={RecomendationPoster} contents={data.results} /> : <p className='m-2'>추천할 컨텐츠가 없습니다.</p>}
     </div>
   );
 }

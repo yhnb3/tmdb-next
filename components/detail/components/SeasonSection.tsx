@@ -32,17 +32,18 @@ export default function SeasonSection({ content } : Props) {
   }
   return (
     <div className="flex mt-5 border-gray-300 border rounded-lg">
-      <Link href={pathUrl}>
+      <Link href={pathUrl} passHref>
         <a>
-        <Image
-          placeholder='blur'
-          blurDataURL={posterUrl}
-          width={146.2}
-          height={225}
-          className="rounded-l-lg object-cover object-top"
-          src={posterUrl}
-          alt=""
-        />
+          <Image
+            placeholder='blur'
+            blurDataURL={posterUrl}
+            width={146.2}
+            height={227}
+            objectFit="cover"
+            className="rounded-l-lg"
+            src={posterUrl}
+            alt=""
+          />
         </a>
       </Link>
       <div className="grid grid-cols-1 p-5 gap-4 w-11/12">

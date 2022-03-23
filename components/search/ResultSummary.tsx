@@ -9,7 +9,7 @@ interface Props {
   tvData: Array<Data>,
   personData: Array<Data>,
   currentSection: string,
-  handleCurrentSection: (section : string) => void
+  handleCurrentSection: ({section : string}) => void
 }
 
 const ResultSummary = ({movieData, tvData, personData, currentSection, handleCurrentSection} : Props) => {
@@ -47,8 +47,8 @@ const ResultSummary = ({movieData, tvData, personData, currentSection, handleCur
       onFocus={() => mouseOn(element.name)}
       onMouseOut={() => mouseOut(element.name)}
       onBlur={() => mouseOut(element.name)}
-      onClick={() => handleCurrentSection(element.name)}
-      onKeyDown={() => handleCurrentSection(element.name)}
+      onClick={() => handleCurrentSection({section : element.name})}
+      onKeyDown={() => handleCurrentSection({section : element.name})}
     >
       <span
         className={`p-1 ${

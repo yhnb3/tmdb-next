@@ -31,7 +31,7 @@ const MobileCastList : React.FC<Props> = ({credit, loading}: Props) => {
     <div className="my-5">
       <p className="font-bold text-xl m-2">주요 출연진</p>
       <div className=" scrollbar-thumb-rounded scrollbar-thin scrollbar-thumb-gray-300 whitespace-nowrap overflow-x-auto">
-        {credit.cast.map((element:Cast) => {
+        {credit.cast.length > 0 ? credit.cast.map((element:Cast) => {
           if (element.order < 7) {
             return (
               <div
@@ -65,7 +65,7 @@ const MobileCastList : React.FC<Props> = ({credit, loading}: Props) => {
             );
           }
           return <></>;
-        })}
+        }) : <p className='m-2'>출연진에 대한 정보가 없습니다.</p>}
       </div>
     </div>
   )
