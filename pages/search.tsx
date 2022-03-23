@@ -18,7 +18,7 @@ import SearchResult from '../components/search/SearchResult';
 
 import {useSelector, useDispatch} from 'react-redux';
 import {AppState} from '../app/store'
-import { changeSection } from './feature/search/searchSlice';
+import { changeSection } from '../app/search/searchSlice';
 
 
 export default function Search ({isMobileDevice}) {

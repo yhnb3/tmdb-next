@@ -2,7 +2,7 @@ import {configureStore,  ThunkAction} from '@reduxjs/toolkit';
 import {Action} from 'redux';
 import {createWrapper, HYDRATE} from 'next-redux-wrapper';
 import { combineReducers } from 'redux'
-import searchSlice from '../pages/feature/search/searchSlice';
+import searchSlice from './search/searchSlice';
 
 
 const combinedReducer = combineReducers({
