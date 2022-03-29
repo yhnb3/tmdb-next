@@ -22,7 +22,7 @@ const useInfiniteFetchData = ({ section, category } :Props) => {
       return null;
     return `https://api.themoviedb.org/3/${category}/${section}?api_key=${
       process.env.NEXT_PUBLIC_API_CODE
-    }&language=ko&page=${pageIndex + 1}`;
+    }&language=ko&page=${pageIndex + 1}&region=KR`;
   };
 
   const {
