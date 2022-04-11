@@ -46,6 +46,7 @@ export const getStaticProps: GetStaticProps = async () => {
     `https://api.themoviedb.org/3/tv/popular?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko&page=1&region=KR`,
     `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko&region=KR`,
     `https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko&region=KR`,
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko&region=KR`
   ]
   const promises = urls.map( async (url) => {
     const res = await fetch(url)
@@ -63,6 +64,12 @@ export const getStaticProps: GetStaticProps = async () => {
         상영중: datas[0],
         TV: datas[1],
       },
+    },
+    {
+      name: "upcoming",
+      title: "개봉 예정 영화",
+      target: "",
+      datas: datas[4],
     },
     {
       name: "trending",

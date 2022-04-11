@@ -14,7 +14,7 @@ interface Props {
   } | {
     오늘: any,
     이번주: any
-  },
+  } | any,
   categories: Array<string>,
 }
 
@@ -28,20 +28,24 @@ const ContentListContainer = ({
   const categoryChange = (section:string) => {
     setCurrentCategory(section);
   };
+  const data = title === "개봉 예정 영화" ? datas.results : datas[currentCategory].results  
   
   return (
-    <div>
+    <div className='my-10'>
       <div className="flex flex-row my-3 px-5">
         <div className="flex items-center">
-          <p className="font-bold">{title}</p>
+          <p className="text-2xl font-bold">{title}</p>
         </div>
-        <CategoryBtn
-          categories={categories}
-          currentCategory={currentCategory}
-          categoryChange={categoryChange}
-        />
+        {title === "개봉 예정 영화" 
+          ? null 
+          : <CategoryBtn
+            categories={categories}
+            currentCategory={currentCategory}
+            categoryChange={categoryChange}
+          />
+        }
       </div>
-      <Slide Component={Poster} contents={datas[currentCategory].results} />
+      <Slide Component={Poster} contents={data} />
     </div>
   );
 }

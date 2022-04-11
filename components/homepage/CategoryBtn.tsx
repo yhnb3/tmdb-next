@@ -11,11 +11,11 @@ const CategoryBtn = ({
   currentCategory,
 }: Props) => {
   return (
-    <div className="flex mx-2 rounded-full border border-black">
+    <div className="flex mx-2 rounded-full border border-black h-8">
       {categories.map((category : string) => {
         return (
           <button
-            className={`${currentCategory === category ? "rounded-full bg-gray-500 text-white px-5 py-1 " : ""} px-5`}
+            className={`${currentCategory === category ? "rounded-full bg-black text-white px-5 py-1 " : ""} px-5`}
             key={category}
             onClick={() => categoryChange(category)}
             type="button"

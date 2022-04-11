@@ -11,7 +11,7 @@ interface Section {
   } | {
     오늘: any,
     이번주: any
-  }
+  } | any
 }
 
 interface Props {
