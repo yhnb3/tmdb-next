@@ -1,65 +1,90 @@
-import { ReactElement, useEffect } from 'react'
+import { ReactElement, useEffect } from "react";
 
-import {useState, useCallback} from 'react'
-import { GetServerSideProps } from 'next/types';
+import { useState, useCallback } from "react";
+import { GetServerSideProps } from "next/types";
 import Head from "next/head";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
-import isMobile from '../libs/isMobile';
+import isMobile from "../libs/isMobile";
 
-import { FaSearch } from '@react-icons/all-files/fa/FaSearch';
+import { FaSearch } from "@react-icons/all-files/fa/FaSearch";
 
-import Layout from '../components/Layout';
+import Layout from "../components/Layout";
 
-import useSearchInfiniteFetchData from '../hooks/useSearchInfiniteFetchData';
+import useSearchInfiniteFetchData from "../hooks/useSearchInfiniteFetchData";
 
-import ResultSummary from '../components/search/ResultSummary';
-import SearchResult from '../components/search/SearchResult';
+import ResultSummary from "../components/search/ResultSummary";
+import SearchResult from "../components/search/SearchResult";
 
-import {useSelector, useDispatch} from 'react-redux';
-import {AppState} from '../app/store'
-import { changeSection } from '../app/search/searchSlice';
+import { useSelector, useDispatch } from "react-redux";
+import { AppState } from "../app/store";
+import { changeSection } from "../app/search/searchSlice";
 
+export default function Search({ isMobileDevice }) {
+  const router = useRouter();
+  const { query } = router.query;
 
-export default function Search ({isMobileDevice}) {
-  const router = useRouter()
-  const { query } = router.query
+  const { currentSection } = useSelector(
+    (state: AppState) => state.searchSlice
+  );
+  const dispatch = useDispatch();
 
-  const {currentSection } = useSelector((state: AppState) => state.searchSlice)
-  const dispatch = useDispatch()
+  const setCurrentSection = useCallback(
+    ({ section }) => {
+      dispatch(changeSection({ section }));
+    },
+    [dispatch]
+  );
 
-  const setCurrentSection = useCallback(({ section }) => { 
-    dispatch(changeSection({ section })); 
-  }, [dispatch]);
+  const [inputValue, setInputValue] = useState(query);
 
+  const {
+    data: movieData,
+    error: movieError,
+    loading: movieLoading,
+    setSize: movieSetSize,
+    size: movieSize,
+    initialLoading: movieInitialLoading,
+  } = useSearchInfiniteFetchData({ category: "movie", query: query });
+  const {
+    data: tvData,
+    error: tvError,
+    loading: tvLoading,
+    setSize: tvSetSize,
+    size: tvSize,
+    initialLoading: tvInitialLoading,
+  } = useSearchInfiniteFetchData({ category: "tv", query: query });
+  const {
+    data: personData,
+    error: personError,
+    loading: personLoading,
+    setSize: personSetSize,
+    size: personSize,
+    initialLoading: personInitialLoading,
+  } = useSearchInfiniteFetchData({ category: "person", query: query });
 
-  const [inputValue, setInputValue] = useState(query)
-  
-  const {data: movieData, error: movieError, loading: movieLoading, setSize: movieSetSize, size: movieSize, initialLoading: movieInitialLoading} = useSearchInfiniteFetchData({category: 'movie', query : query})
-  const {data: tvData, error: tvError, loading: tvLoading, setSize: tvSetSize, size: tvSize, initialLoading: tvInitialLoading} = useSearchInfiniteFetchData({category: 'tv', query : query})
-  const {data: personData, error: personError, loading: personLoading, setSize: personSetSize, size: personSize, initialLoading: personInitialLoading} = useSearchInfiniteFetchData({category: 'person', query : query})
+  const initialLoading =
+    movieInitialLoading || tvInitialLoading || personInitialLoading;
 
-  const initialLoading = movieInitialLoading || tvInitialLoading || personInitialLoading
-
-  const loading = movieLoading || tvLoading || personLoading
+  const loading = movieLoading || tvLoading || personLoading;
 
   useEffect(() => {
     if (currentSection === "") {
-      let section = 'movie'
+      let section = "movie";
       if (!loading && movieData && tvData && personData) {
         if (personData[0].results.length > 0) {
-          section = 'person'
+          section = "person";
         }
         if (tvData[0].results.length > 0) {
-          section = 'tv'
+          section = "tv";
         }
         if (movieData[0].results.length > 0) {
-          section = 'movie'
+          section = "movie";
         }
       }
-      setCurrentSection({section})
+      setCurrentSection({ section });
     }
-  }, [loading])
+  }, [loading]);
 
   return (
     <div>
@@ -93,13 +118,34 @@ export default function Search ({isMobileDevice}) {
             </div>
             <div>
               <div className="mt-2 my-5 mobile:flex-row mobile:flex mobile:my-0">
-                {initialLoading ? null : <ResultSummary movieData={movieData} personData={personData} tvData={tvData} currentSection={currentSection} handleCurrentSection={setCurrentSection} />}
+                {initialLoading ? null : (
+                  <ResultSummary
+                    movieData={movieData}
+                    personData={personData}
+                    tvData={tvData}
+                    currentSection={currentSection}
+                    handleCurrentSection={setCurrentSection}
+                  />
+                )}
               </div>
             </div>
           </div>
         </div>
         <div className="w-8/12 mobile:w-full mobile:px-5">
-          <SearchResult isMobile={isMobileDevice} currentSection={currentSection} tvData={tvData} movieData={movieData} personData={personData} movieCurrentPage={movieSize} movieSetCurrentPage={movieSetSize} tvCurrentPage={tvSize} tvSetCurrentPage={tvSetSize} personCurrentPage={personSize} personSetCurrentPage={personSetSize} loading={loading}/>
+          <SearchResult
+            isMobile={isMobileDevice}
+            currentSection={currentSection}
+            tvData={tvData}
+            movieData={movieData}
+            personData={personData}
+            movieCurrentPage={movieSize}
+            movieSetCurrentPage={movieSetSize}
+            tvCurrentPage={tvSize}
+            tvSetCurrentPage={tvSetSize}
+            personCurrentPage={personSize}
+            personSetCurrentPage={personSetSize}
+            loading={loading}
+          />
         </div>
       </div>
     </div>
@@ -107,19 +153,14 @@ export default function Search ({isMobileDevice}) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const isMobileDevice = isMobile(context.req)
+  const isMobileDevice = isMobile(context.req);
   return {
     props: {
       isMobileDevice,
-    }
-  }
-}
+    },
+  };
+};
 
 Search.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <Layout>
-      {page}
-    </Layout>
-  )
-}
-
+  return <Layout>{page}</Layout>;
+};

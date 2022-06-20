@@ -1,10 +1,9 @@
-import * as React from 'react';
+import * as React from "react";
 
 export default function PersonLoading() {
   const items = Array(20)
     .fill(1)
     .map((element, idx) => idx + element);
-  console.log(items);
   return (
     <div className="grid grid-cols-5 place-items-center mobile:grid-cols-2">
       {items.map((element) => (

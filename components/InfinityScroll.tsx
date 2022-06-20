@@ -1,15 +1,15 @@
 /* eslint-disable no-underscore-dangle */
-import * as React from 'react'
-import { throttle } from 'lodash';
+import { useEffect } from "react";
+import { throttle } from "lodash";
 
 interface Props {
-  size: number,
-  error: boolean,
-  setSize: (size: number) => void,
-  children: React.ReactElement,
-  dataLen: number,
+  size: number;
+  error: boolean;
+  setSize: (size: number) => void;
+  children: React.ReactElement;
+  dataLen: number;
 }
-const InfinityScroll = ({setSize, size, children, error, dataLen} : Props) => {
+const InfinityScroll = ({ setSize, size, children, error, dataLen }: Props) => {
   const _throttle = throttle((e) => {
     if (
       e.target.scrollingElement.scrollHeight - 300 <=
@@ -19,16 +19,16 @@ const InfinityScroll = ({setSize, size, children, error, dataLen} : Props) => {
     }
   }, 500);
 
-  React.useEffect(() => {
-    window.addEventListener('scroll', _throttle);
+  useEffect(() => {
+    window.addEventListener("scroll", _throttle);
 
     return () => {
-      window.removeEventListener('scroll', _throttle);
+      window.removeEventListener("scroll", _throttle);
     };
-  },[dataLen]);
-  
-  if (error) return <p>에러</p>
-  return children
-}
+  }, [_throttle, dataLen]);
 
-export default InfinityScroll
+  if (error) return <p>에러</p>;
+  return children;
+};
+
+export default InfinityScroll;

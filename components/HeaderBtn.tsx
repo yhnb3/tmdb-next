@@ -1,22 +1,27 @@
-import * as React from 'react'
-
-import DropMenu from './DropMenu'
+import DropMenu from "./DropMenu";
 
 interface Menu {
-  url: string, 
-  name: string,
+  url: string;
+  name: string;
 }
 
 interface Props {
-  showMenu: (category: string) => void,
-  hideMenu: (category: string) => void,
-  isVisible: boolean,
-  category: string,
-  name: string,
-  menus: Array<Menu>
+  showMenu: (category: string) => void;
+  hideMenu: (category: string) => void;
+  isVisible: boolean;
+  category: string;
+  name: string;
+  menus: Array<Menu>;
 }
 
-const HeaderBtn : React.FC<Props> = ({showMenu, hideMenu, isVisible, category, name, menus}:Props) => (
+const HeaderBtn = ({
+  showMenu,
+  hideMenu,
+  isVisible,
+  category,
+  name,
+  menus,
+}: Props) => (
   <div
     className="flex h-full items-center mobile:hidden"
     data-name={category}
@@ -28,12 +33,8 @@ const HeaderBtn : React.FC<Props> = ({showMenu, hideMenu, isVisible, category, n
     <button className="mr-12 font-bold text-white text-xl" type="button">
       {name}
     </button>
-    <DropMenu
-      category={category}
-      menus={menus}
-      isVisible={isVisible}
-    />
+    <DropMenu category={category} menus={menus} isVisible={isVisible} />
   </div>
-  )
+);
 
-export default HeaderBtn
+export default HeaderBtn;

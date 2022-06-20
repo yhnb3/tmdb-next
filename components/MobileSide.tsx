@@ -1,115 +1,117 @@
-import { useState, useRef } from 'react';
-import Link from 'next/link';
+import { useState, MouseEvent } from "react";
+import SideBtn from "./SideBtn";
 
 interface Props {
-  sideVisible: boolean,
-  handleSide: () => void,
-  count: number
+  sideVisible: boolean;
+  handleSide: () => void;
+  count: number;
 }
 
-export default function MobileSide({ sideVisible, handleSide, count } : Props) {
+const MOVIE = [
+  { href: "/movie/popular", name: "인기" },
+  { href: "/movie/top_rated", name: "평점 높은" },
+  { href: "/movie/now_playing", name: "현재 상영중" },
+];
+
+const TV = [
+  { href: "/tv/popular", name: "인기" },
+  { href: "/tv/top_rated", name: "평점 높은" },
+];
+
+export default function MobileSide({ sideVisible, handleSide, count }: Props) {
   const [subMenuVisible, setSubMenuVisible] = useState({
     movie: false,
     tv: false,
     person: false,
-  }); 
-  const handleSubMenu = (category : string) => {
-    
+  });
+
+  const handleSubMenu = (event: MouseEvent<HTMLButtonElement>) => {
+    const { category } = event.currentTarget.dataset;
     setSubMenuVisible({
       ...subMenuVisible,
       [category]: !subMenuVisible[category],
     });
   };
+
   return (
     <div
-      className={`fixed visible top-20 w-80 min-h-screen z-50 bg-blue-800 opacity-95 ${count === 0 ? "-left-80" : sideVisible ? 'animate-show-side left-0' : 'animate-hide-side -left-80'}`}
+      className={`fixed visible top-20 w-80 min-h-screen z-50 bg-blue-800 opacity-95 ${
+        count === 0
+          ? "-left-80"
+          : sideVisible
+          ? "animate-show-side left-0"
+          : "animate-hide-side -left-80"
+      }`}
     >
       <div className="flex flex-col text-white text-2xl  p-5 ">
         <button
           className="text-left font-bold"
           type="button"
-          onClick={() => handleSubMenu('movie')}
+          data-category="movie"
+          onClick={handleSubMenu}
         >
           영화
         </button>
         <ul
           className={`text-xl p-1 mb-5 ${
-            subMenuVisible.movie ? 'block' : 'hidden'
+            subMenuVisible.movie ? "block" : "hidden"
           }`}
         >
-          <Link href="/movie/popular" passHref>
-            <a>
-            <li className="my-1" onClick={() => handleSide()}>
-              인기
-            </li>
-            </a>
-            
-          </Link>
-          <Link href="/movie/top_rated" passHref>
-            <a>
-              <li className="my-1" onClick={() => handleSide()}>
-              평점 높은
-            </li>
-            </a>
-            
-          </Link>
-          <Link href="/movie/now_playing" passHref>
-            <a>
-              <li className="my-1" onClick={() => handleSide()}>
-              현재 상영중
-            </li>
-            </a>
-            
-          </Link>
+          {MOVIE.map((item) => {
+            const key = `menu-movie-${item.name}`;
+            return (
+              <SideBtn
+                key={key}
+                href={item.href}
+                name={item.name}
+                handleSide={handleSide}
+              />
+            );
+          })}
         </ul>
         <button
           className="text-left font-bold"
           type="button"
-          onClick={() => handleSubMenu('tv')}
+          data-category="tv"
+          onClick={handleSubMenu}
         >
           TV 프로그램
         </button>
         <ul
           className={`text-xl p-1 mb-5 ${
-            subMenuVisible.tv ? 'block' : 'hidden'
+            subMenuVisible.tv ? "block" : "hidden"
           }`}
         >
-          <Link href="/tv/popular" passHref>
-            <a>
-              <li className="my-1" onClick={() => handleSide()}>
-              인기
-            </li>
-            </a>
-            
-          </Link>
-          <Link href="/tv/top_rated" passHref>
-            <a>
-              <li className="my-1" onClick={() => handleSide()}>
-              평점 높은
-            </li>
-            </a>
-            
-          </Link>
+          {TV.map((item) => {
+            const key = `menu-tv-${item.name}`;
+            return (
+              <SideBtn
+                key={key}
+                href={item.href}
+                name={item.name}
+                handleSide={handleSide}
+              />
+            );
+          })}
         </ul>
         <button
           className="text-left font-bold"
           type="button"
-          onClick={() => handleSubMenu('person')}
+          data-category="person"
+          onClick={handleSubMenu}
         >
           인물
         </button>
         <ul
           className={`text-xl p-1 mb-5 ${
-            subMenuVisible.person ? 'block' : 'hidden'
+            subMenuVisible.person ? "block" : "hidden"
           }`}
         >
-          <Link href="/person/popular" passHref>
-            <a>
-              <li className="my-1" onClick={() => handleSide()}>
-              인기 인물
-            </li>
-            </a>     
-          </Link>
+          <SideBtn
+            href="/person/popular"
+            name="인기 인물"
+            handleSide={handleSide}
+          />
         </ul>
       </div>
     </div>
