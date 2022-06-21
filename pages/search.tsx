@@ -23,20 +23,17 @@ import { changeSection } from "../app/search/searchSlice";
 export default function Search({ isMobileDevice }) {
   const router = useRouter();
   const { query } = router.query;
-  const [section, setSection] = useState("movie");
 
-  // const { currentSection } = useSelector(
-  //   (state: AppState) => state.searchSlice
-  // );
+  const { section } = useSelector((state: AppState) => state.searchSlice);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const setCurrentSection = useCallback(
-  //   ({ section }) => {
-  //     dispatch(changeSection({ section }));
-  //   },
-  //   [dispatch]
-  // );
+  const setSection = useCallback(
+    (section) => {
+      dispatch(changeSection({ section }));
+    },
+    [dispatch]
+  );
 
   const [inputValue, setInputValue] = useState(query);
 
@@ -69,17 +66,17 @@ export default function Search({ isMobileDevice }) {
 
   useEffect(() => {
     if (!loading) {
-      if (movieData[0].length > 0) return;
-      if (tvData[0].length > 0) {
+      if (movieData[0].results.length > 0) return;
+      if (tvData[0].results.length > 0) {
         setSection("tv");
         return;
       }
-      if (personData[0].length > 0) {
+      if (personData[0].results.length > 0) {
         setSection("person");
         return;
       }
     }
-  }, [loading, movieData, personData, tvData]);
+  }, [loading, movieData, personData, setSection, tvData]);
 
   return (
     <div>

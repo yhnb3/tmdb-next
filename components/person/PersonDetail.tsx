@@ -1,27 +1,26 @@
-import Image from 'next/image'
+import Image from "next/image";
 
-import { KnownFor, PersonHistory, PersonInfo } from './components';
-import { Person } from './types'
+import { KnownFor, PersonHistory, PersonInfo } from "./components";
+import { Person } from "./types";
 
 interface Props {
-  person: Person
+  person: Person;
 }
 
-export default function PersonDetail({ person } : Props) {
-  console.log(1)
+export default function PersonDetail({ person }: Props) {
   return (
     <div className="flex flex-row mt-10 mobile:px-0 mobile:w-full w-screen mx-auto">
       <div className="flex flex-col min-w-personImg ">
-          <Image
-            placeholder='blur'
-            blurDataURL={`https://image.tmdb.org/t/p/w300/${person.profile_path}`}
-            width={300}
-            height={450}
-            objectFit='cover'
-            className="rounded-md shadow-lg"
-            src={`https://image.tmdb.org/t/p/w300/${person.profile_path}`}
-            alt={person.name}
-          />
+        <Image
+          placeholder="blur"
+          blurDataURL={`https://image.tmdb.org/t/p/w300/${person.profile_path}`}
+          width={300}
+          height={450}
+          objectFit="cover"
+          className="rounded-md shadow-lg"
+          src={`https://image.tmdb.org/t/p/w300/${person.profile_path}`}
+          alt={person.name}
+        />
         <PersonInfo person={person} />
       </div>
       <div className="flex flex-col pl-10 w-8/12">
@@ -34,7 +33,7 @@ export default function PersonDetail({ person } : Props) {
               : `${person.name}의 약력란이 비어있습니다.`}
           </p>
         </div>
-        <KnownFor id={person.id} department={person.known_for_department}/>
+        <KnownFor id={person.id} department={person.known_for_department} />
         <PersonHistory id={person.id} />
       </div>
     </div>

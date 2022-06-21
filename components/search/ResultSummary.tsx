@@ -1,74 +1,97 @@
-import * as React from 'react'
+import { useState, MouseEvent, FocusEvent, KeyboardEvent } from "react";
 
 interface Data {
-  total_results: string,
+  total_results: string;
 }
 
 interface Props {
-  movieData: Array<Data>,
-  tvData: Array<Data>,
-  personData: Array<Data>,
-  currentSection: string,
-  handleCurrentSection: ({section : string}) => void
+  movieData: Array<Data>;
+  tvData: Array<Data>;
+  personData: Array<Data>;
+  currentSection: string;
+  setSection: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ResultSummary = ({movieData, tvData, personData, currentSection, handleCurrentSection} : Props) => {
-  const [isHover, setIsHover] = React.useState({
+const ResultSummary = ({
+  movieData,
+  tvData,
+  personData,
+  currentSection,
+  setSection,
+}: Props) => {
+  const [isHover, setIsHover] = useState({
     movie: false,
     tv: false,
     person: false,
   });
 
-  const mouseOn = (section : string) => {
-    setIsHover({ ...isHover, [section]: true });
+  const mouseOn = (
+    event: MouseEvent<HTMLButtonElement> | FocusEvent<HTMLButtonElement>
+  ) => {
+    const { name } = event.currentTarget.dataset;
+    setIsHover({ ...isHover, [name]: true });
   };
-  const mouseOut = (section : string) => {
-    setIsHover({ ...isHover, [section]: false });
+  const mouseOut = (
+    event: MouseEvent<HTMLButtonElement> | FocusEvent<HTMLButtonElement>
+  ) => {
+    const { name } = event.currentTarget.dataset;
+    setIsHover({ ...isHover, [name]: false });
+  };
+
+  const handleChange = (
+    event: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLButtonElement>
+  ) => {
+    const { name } = event.currentTarget.dataset;
+    setSection(name);
   };
 
   const results = [
-    { section: '영화', name: 'movie', count: movieData[0].total_results },
-    { section: 'TV 프로그램', name: 'tv', count: tvData[0].total_results },
-    { section: '인물', name: 'person', count: personData[0].total_results },
+    { section: "영화", name: "movie", count: movieData[0].total_results },
+    { section: "TV 프로그램", name: "tv", count: tvData[0].total_results },
+    { section: "인물", name: "person", count: personData[0].total_results },
   ];
 
-  return <>
-  {results.map((element) => (
-    <div
-      key={element.name}
-      className={`flex justify-between px-4 py-2 ${
-        element.name === currentSection || isHover[element.name]
-          ? 'bg-gray-200 mobile:text-blue-400 mobile:bg-transparent'
-          : ''
-      }`}
-      role="button"
-      tabIndex={0}
-      onMouseOver={() => mouseOn(element.name)}
-      onFocus={() => mouseOn(element.name)}
-      onMouseOut={() => mouseOut(element.name)}
-      onBlur={() => mouseOut(element.name)}
-      onClick={() => handleCurrentSection({section : element.name})}
-      onKeyDown={() => handleCurrentSection({section : element.name})}
-    >
-      <span
-        className={`p-1 ${
-          element.name === currentSection ? 'font-bold' : ''
-        }`}
-      >
-        {element.section}
-      </span>
-      <span
-        className={`text-xs text-center align-middle my-1.5 rounded-md mobile:border text-black ${
-          element.name === currentSection || isHover[element.name]
-            ? 'bg-white mobile:border-blue-400'
-            : 'bg-gray-200 mobile:bg-white'
-        } w-6`}
-      >
-        {element.count}
-      </span>
-    </div>
-  ))}
-  </>
+  return (
+    <>
+      {results.map((element) => (
+        <button
+          type="button"
+          key={element.name}
+          className={`flex w-full justify-between px-4 py-2 ${
+            element.name === currentSection || isHover[element.name]
+              ? "bg-gray-200 mobile:text-blue-400 mobile:bg-transparent"
+              : ""
+          }`}
+          role="button"
+          tabIndex={0}
+          data-name={element.name}
+          onMouseOver={mouseOn}
+          onFocus={mouseOn}
+          onMouseOut={mouseOut}
+          onBlur={mouseOut}
+          onClick={handleChange}
+          onKeyDown={handleChange}
+        >
+          <span
+            className={`p-1 ${
+              element.name === currentSection ? "font-bold" : ""
+            }`}
+          >
+            {element.section}
+          </span>
+          <span
+            className={`text-xs text-center align-middle my-1.5 rounded-md mobile:border text-black ${
+              element.name === currentSection || isHover[element.name]
+                ? "bg-white mobile:border-blue-400"
+                : "bg-gray-200 mobile:bg-white"
+            } w-6`}
+          >
+            {element.count}
+          </span>
+        </button>
+      ))}
+    </>
+  );
 };
 
-export default ResultSummary
+export default ResultSummary;
