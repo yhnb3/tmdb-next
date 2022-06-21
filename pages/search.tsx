@@ -23,24 +23,25 @@ import { changeSection } from "../app/search/searchSlice";
 export default function Search({ isMobileDevice }) {
   const router = useRouter();
   const { query } = router.query;
+  const [section, setSection] = useState("movie");
 
-  const { currentSection } = useSelector(
-    (state: AppState) => state.searchSlice
-  );
-  const dispatch = useDispatch();
+  // const { currentSection } = useSelector(
+  //   (state: AppState) => state.searchSlice
+  // );
 
-  const setCurrentSection = useCallback(
-    ({ section }) => {
-      dispatch(changeSection({ section }));
-    },
-    [dispatch]
-  );
+  // const dispatch = useDispatch();
+
+  // const setCurrentSection = useCallback(
+  //   ({ section }) => {
+  //     dispatch(changeSection({ section }));
+  //   },
+  //   [dispatch]
+  // );
 
   const [inputValue, setInputValue] = useState(query);
 
   const {
     data: movieData,
-    error: movieError,
     loading: movieLoading,
     setSize: movieSetSize,
     size: movieSize,
@@ -48,7 +49,6 @@ export default function Search({ isMobileDevice }) {
   } = useSearchInfiniteFetchData({ category: "movie", query: query });
   const {
     data: tvData,
-    error: tvError,
     loading: tvLoading,
     setSize: tvSetSize,
     size: tvSize,
@@ -56,7 +56,6 @@ export default function Search({ isMobileDevice }) {
   } = useSearchInfiniteFetchData({ category: "tv", query: query });
   const {
     data: personData,
-    error: personError,
     loading: personLoading,
     setSize: personSetSize,
     size: personSize,
@@ -69,22 +68,18 @@ export default function Search({ isMobileDevice }) {
   const loading = movieLoading || tvLoading || personLoading;
 
   useEffect(() => {
-    if (currentSection === "") {
-      let section = "movie";
-      if (!loading && movieData && tvData && personData) {
-        if (personData[0].results.length > 0) {
-          section = "person";
-        }
-        if (tvData[0].results.length > 0) {
-          section = "tv";
-        }
-        if (movieData[0].results.length > 0) {
-          section = "movie";
-        }
+    if (!loading) {
+      if (movieData[0].length > 0) return;
+      if (tvData[0].length > 0) {
+        setSection("tv");
+        return;
       }
-      setCurrentSection({ section });
+      if (personData[0].length > 0) {
+        setSection("person");
+        return;
+      }
     }
-  }, [loading]);
+  }, [loading, movieData, personData, tvData]);
 
   return (
     <div>
@@ -123,8 +118,8 @@ export default function Search({ isMobileDevice }) {
                     movieData={movieData}
                     personData={personData}
                     tvData={tvData}
-                    currentSection={currentSection}
-                    handleCurrentSection={setCurrentSection}
+                    currentSection={section}
+                    setSection={setSection}
                   />
                 )}
               </div>
@@ -134,7 +129,7 @@ export default function Search({ isMobileDevice }) {
         <div className="w-8/12 mobile:w-full mobile:px-5">
           <SearchResult
             isMobile={isMobileDevice}
-            currentSection={currentSection}
+            currentSection={section}
             tvData={tvData}
             movieData={movieData}
             personData={personData}
