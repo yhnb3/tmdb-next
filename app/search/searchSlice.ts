@@ -5,7 +5,7 @@ interface SearchState {
 }
 
 const initialState: SearchState = {
-  section: "",
+  section: "movie",
 };
 
 export const searchSlice = createSlice({

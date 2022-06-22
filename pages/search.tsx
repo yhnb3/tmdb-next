@@ -1,24 +1,19 @@
-import { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import { useState, useCallback } from "react";
 import { GetServerSideProps } from "next/types";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import isMobile from "../libs/isMobile";
+import isMobile from "libs/isMobile";
 
-import { FaSearch } from "@react-icons/all-files/fa/FaSearch";
+import { Layout } from "components";
 
-import Layout from "../components/Layout";
+import useSearchInfiniteFetchData from "hooks/useSearchInfiniteFetchData";
 
-import useSearchInfiniteFetchData from "../hooks/useSearchInfiniteFetchData";
-
-import ResultSummary from "../components/search/ResultSummary";
-import SearchResult from "../components/search/SearchResult";
-
-import { useSelector, useDispatch } from "react-redux";
-import { AppState } from "../app/store";
-import { changeSection } from "../app/search/searchSlice";
+import { AppState } from "app/store";
+import { changeSection } from "app/search/searchSlice";
+import { Input, ResultSummary, SearchResult } from "components/search";
 
 export default function Search({ isMobileDevice }) {
   const router = useRouter();
@@ -34,8 +29,6 @@ export default function Search({ isMobileDevice }) {
     },
     [dispatch]
   );
-
-  const [inputValue, setInputValue] = useState(query);
 
   const {
     data: movieData,
@@ -84,24 +77,7 @@ export default function Search({ isMobileDevice }) {
         <title>{query}</title>
         <meta name="description" content="Helmet application" />
       </Head>
-      <div className="flex border-b">
-        <div className="flex w-screen mx-auto mobile:w-full">
-          <div className="flex">
-            <FaSearch className="w-3 h-3 my-auto mx-3" />
-          </div>
-          <form action="/search?" className="h-10 w-full">
-            <input
-              className="text-gray-400 h-full outline-none"
-              type="text"
-              name="query"
-              autoComplete="off"
-              placeholder="영화, tv 프로그램 검색..."
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-            />
-          </form>
-        </div>
-      </div>
+      <Input query={query} />
       <div className="flex flex-row w-screen mx-auto mobile:flex-col mobile:w-full">
         <div className="w-4/12 pt-10 pr-10 mobile:w-full mobile:p-0">
           <div className="rounded-lg border border-gray-200 mobile:rounded-none">

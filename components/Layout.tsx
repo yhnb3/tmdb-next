@@ -3,7 +3,7 @@ import Header from "./Header";
 import dynamic from "next/dynamic";
 
 import { useRouter } from "next/router";
-import isMobile from "../libs/isMobile";
+import isMobile from "libs/isMobile";
 import { ReactNode, useEffect, useState } from "react";
 
 interface Props {
