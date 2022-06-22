@@ -5,9 +5,8 @@ import { GetServerSideProps } from "next/types";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import isMobile from "libs/isMobile";
-
-import { Layout } from "components";
+import { Layout } from "components/shared";
+import { isMobile } from "libs";
 
 import useSearchInfiniteFetchData from "hooks/useSearchInfiniteFetchData";
 

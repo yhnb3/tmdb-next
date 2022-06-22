@@ -1,5 +1,6 @@
-import { FaSearch } from "@react-icons/all-files/fa/FaSearch";
 import { ChangeEvent, useState } from "react";
+
+import { FaSearch } from "@react-icons/all-files/fa/FaSearch";
 
 interface IProps {
   query: string | string[];
