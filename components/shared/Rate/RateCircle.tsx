@@ -1,11 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
 
 interface Props {
-  score: number,
-  color: string,
-  times: number,
+  score: number;
+  color: string;
+  times: number;
 }
-const RateCircle =({ score, color, times } :Props) => {
+const RateCircle = ({ score, color, times }: Props) => {
   const dashArray = `${(score * Math.PI * 2 * 17 * times) / 10} ${
     Math.PI * 2 * 17 * times - (score * Math.PI * 2 * 17 * times) / 10
   }`;
@@ -43,7 +43,7 @@ const RateCircle =({ score, color, times } :Props) => {
         x={score < 10 ? 8 * times : 5 * times}
         y={score < 10 ? 26 * times : 24 * times}
         fill="white"
-        fontSize={score < 10 ? 17 * times : 13 * times}
+        fontSize={score < 10 ? 16 * times : 11 * times}
         fontFamily="'맑은 고딕', cursive"
       >
         {score * 10}
@@ -62,7 +62,7 @@ const RateCircle =({ score, color, times } :Props) => {
     <svg
       version="1.1"
       baseProfile="full"
-      width={40 *times}
+      width={40 * times}
       height={40 * times}
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -79,13 +79,13 @@ const RateCircle =({ score, color, times } :Props) => {
         x={8 * times}
         y={26 * times}
         fill="white"
-        fontSize={17 * times}
+        fontSize={15 * times}
         fontFamily="'맑은 고딕', cursive"
       >
         NR
       </text>
     </svg>
   );
-}
+};
 
-export default RateCircle
+export default RateCircle;

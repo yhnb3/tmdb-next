@@ -31,7 +31,11 @@ const Rate = ({
     <div
       className={`absolute left-${left} bottom-${bottom} top-${top} right-${right} z-10`}
     >
-      <RateCircle score={score} color={color} times={times} />
+      <RateCircle
+        score={Number(score.toFixed(1))}
+        color={color}
+        times={times}
+      />
     </div>
   );
 };

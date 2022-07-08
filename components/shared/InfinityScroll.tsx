@@ -28,7 +28,7 @@ const InfinityScroll = ({ setSize, size, children, error, dataLen }: Props) => {
   }, [_throttle, dataLen]);
 
   if (error) return <p>에러</p>;
-  return children;
+  return <section>{children}</section>;
 };
 
 export default InfinityScroll;

@@ -32,9 +32,9 @@ const withContentsPage = <P extends object>(
           isMobile ? "px-5 w-full mt-10" : "w-screen pt-10"
         }`}
       >
-        <p className={`${isMobile ? "text-xl" : "text-4xl"} font-bold`}>
+        <h1 className={`${isMobile ? "text-xl" : "text-4xl"} font-bold`}>
           {head_line}
-        </p>
+        </h1>
         <InfiniteScroll
           error={error}
           size={size}

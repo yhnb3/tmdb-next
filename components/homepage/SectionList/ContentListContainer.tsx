@@ -32,7 +32,7 @@ const ContentListContainer = ({ datas, target, categories, title }: Props) => {
     <div className="my-10">
       <div className="flex flex-row my-3 px-5">
         <div className="flex items-center">
-          <p className="text-2xl font-bold">{title}</p>
+          <h2 className="text-2xl font-bold">{title}</h2>
         </div>
         {title === "개봉 예정 영화" ? null : (
           <CategoryBtn
@@ -42,7 +42,9 @@ const ContentListContainer = ({ datas, target, categories, title }: Props) => {
           />
         )}
       </div>
-      <Slide Component={Poster} contents={data} />
+      <section>
+        <Slide Component={Poster} contents={data} />
+      </section>
     </div>
   );
 };

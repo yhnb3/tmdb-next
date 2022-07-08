@@ -10,12 +10,12 @@ export default function Home({ data }) {
     <div className="mx-auto w-screen mobile:mx-0 mobile:w-full">
       <div className="h-80 w-full bg-blue-200 mobile:h-60 ">
         <div className="py-20 mx-auto w-11/12 h-2/4 mobile:py-5">
-          <div className="flex-wrap">
-            <p className="text-4xl">Welcome.</p>
+          <hgroup className="flex-wrap">
+            <h1 className="text-4xl">Welcome.</h1>
             <p className="text-2xl">
               Millions of movies, TV shows and people to discover. Explore now.
             </p>
-          </div>
+          </hgroup>
           <div className="relative rounded-full bg-white mt-4">
             <form action="/search?" className="h-12 w-full">
               <input
