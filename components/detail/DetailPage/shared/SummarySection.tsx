@@ -41,8 +41,8 @@ const SummarySection: React.FC<Props> = ({ content }: Props) => {
     return (
       <div className="flex flex-row my-2">
         {providers.map(
-          (element: { display_priority: string; logo_path: string }) => (
-            <div key={element.display_priority} className="mr-4">
+          (element: { display_priority: string; logo_path: string }, idx) => (
+            <div key={`${element.display_priority}-${idx}`} className="mr-4">
               <Image
                 className="rounded-md mx-2"
                 width={60}

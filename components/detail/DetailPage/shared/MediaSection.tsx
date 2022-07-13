@@ -1,6 +1,4 @@
-import * as React from "react";
-import useFetchData from "../../../../hooks/useFetchData";
-import Youtube from "./Youtube";
+import useFetchData from "hooks/useFetchData";
 
 interface Props {
   id: string;
@@ -8,7 +6,6 @@ interface Props {
 const MediaSection: React.FC<Props> = ({ id }: Props) => {
   const endPoint = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko`;
   const { loading, error, data } = useFetchData({ endPoint });
-
   if (loading) return <p>로딩중...</p>;
   if (error) return <p>에러가 발생하였습니다.</p>;
   return (
@@ -17,15 +14,25 @@ const MediaSection: React.FC<Props> = ({ id }: Props) => {
       {data.results.length > 0 ? (
         <div className="flex flex-row m-2">
           {data.results[0] ? (
-            <Youtube video={data.results[0]} key={0} />
-          ) : (
-            <></>
-          )}
+            <iframe
+              id="ytplayer"
+              width="448"
+              height="273"
+              src={`https://www.youtube.com/embed/${data.results[0].key}?autoplay=0`}
+              frameBorder="0"
+              allowFullScreen={true}
+            ></iframe>
+          ) : null}
           {data.results[1] ? (
-            <Youtube video={data.results[1]} key={1} />
-          ) : (
-            <></>
-          )}
+            <iframe
+              id="ytplayer"
+              width="448"
+              height="273"
+              src={`https://www.youtube.com/embed/${data.results[1].key}?autoplay=0`}
+              frameBorder="0"
+              allowFullScreen={true}
+            ></iframe>
+          ) : null}
         </div>
       ) : (
         <div>
