@@ -1,7 +1,11 @@
-import * as React from "react";
+import { useEffect, useRef } from "react";
 
-import withContentsPage from "HOC/withContentsPage";
 import PersonList from "./PersonList";
+import useInfiniteFetchData from "hooks/useInfiniteFetchData";
+import styles from "./personContents.module.css";
+import { getEntrypointInfo } from "next/dist/build/webpack/plugins/middleware-plugin";
+import { useInfiniteScroll } from "hooks/useInfinteScroll";
+import Loading from "../Loading";
 
 interface Person {
   id: string;
@@ -10,10 +14,46 @@ interface Person {
   known_for: Array<{ name?: string; title?: string }>;
 }
 
-const PersonContents = ({ data }) => {
-  return data.map((element: { page: number; results: Array<Person> }) => (
-    <PersonList key={element.page} persons={element.results} />
-  ));
+interface IProps {
+  section: string;
+  category: string;
+  head_line: string;
+  isMobile: boolean;
+}
+
+const PersonContents = ({ section, category, head_line, isMobile }: IProps) => {
+  const loadingRef = useRef<HTMLDivElement | null>(null);
+
+  const { data } = useInfiniteScroll({
+    target: loadingRef,
+    section,
+    category,
+  });
+
+  const isLoadingVisible =
+    data.length === 0 || data[0].total_pages !== data.length;
+
+  return (
+    <div
+      className={`mx-auto max-w-screeen ${
+        isMobile ? "px-5 w-full mt-10" : "w-screen pt-10"
+      }`}
+    >
+      <h1 className={`${isMobile ? "text-xl" : "text-4xl"} font-bold`}>
+        {head_line}
+      </h1>
+      <section>
+        {data.map((element: { page: number; results: Array<Person> }) => (
+          <PersonList key={element.page} persons={element.results} />
+        ))}
+        {isLoadingVisible ? (
+          <div ref={loadingRef}>
+            <Loading />
+          </div>
+        ) : null}
+      </section>
+    </div>
+  );
 };
 
-export default withContentsPage(PersonContents);
+export default PersonContents;
