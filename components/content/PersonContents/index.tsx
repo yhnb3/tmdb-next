@@ -1,9 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 import PersonList from "./PersonList";
-import useInfiniteFetchData from "hooks/useInfiniteFetchData";
-import styles from "./personContents.module.css";
-import { getEntrypointInfo } from "next/dist/build/webpack/plugins/middleware-plugin";
 import { useInfiniteScroll } from "hooks/useInfinteScroll";
 import Loading from "../Loading";
 

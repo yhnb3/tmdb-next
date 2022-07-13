@@ -1,6 +1,5 @@
 import { Poster, SearchContent } from "components/shared";
 
-import withContentsPage from "HOC/withContentsPage";
 import { useInfiniteScroll } from "hooks/useInfinteScroll";
 import { useMemo, useRef } from "react";
 import Loading from "../Loading";
