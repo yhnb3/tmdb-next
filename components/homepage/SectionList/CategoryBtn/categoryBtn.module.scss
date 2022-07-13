@@ -1,0 +1,40 @@
+.toggle__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10 0px;
+  margin: 0 20px;
+  height: 30px;
+  width: 120px;
+  border-radius: 50px;
+  border: 0.5px solid #1f3a8a;
+  position: relative;
+}
+
+.toggle__button {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  color: rgb(177, 175, 175);
+  font-size: 14px;
+  font-weight: 600;
+  background-color: transparent;
+
+  &.selected {
+    color: white;
+  }
+}
+
+.toggle__select {
+  position: absolute;
+  left: 0;
+  height: 30px;
+  width: 60px;
+  border-radius: 50px;
+  background-color: #1f3a8a;
+  transition: transform 0.2s ease-out;
+
+  &.right {
+    transform: translateX(100%);
+  }
+}
