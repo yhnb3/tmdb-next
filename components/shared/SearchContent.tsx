@@ -31,7 +31,7 @@ const SearchContent = ({ content }: Props) => {
     : "미정";
 
   const overviewRender = () => (
-    <p className="text-sm max-h-10 overflow-ellipsis overflow-hidden line-clamp-2">
+    <p className="text-sm max-h-10 overflow-ellipsis overflow-hidden line-clamp-2 mobile:text-xs mobile:max-h-8">
       {content.overview}
     </p>
   );
@@ -40,27 +40,30 @@ const SearchContent = ({ content }: Props) => {
     return <></>;
   }
   return (
-    <div className="flex mt-5 border-gray-300 border rounded-md w-6/8 h-48">
-      <button className="relative w-32">
+    <div className="flex mt-5 border-gray-300 border rounded-md w-6/8 h-48 mobile:h-36">
+      <button className="relative h-48 w-32 mobile:h-36 mobile:w-24">
         <Link href={pathUrl} passHref>
           <Image
-            className="relative h-full w-40 rounded-l-md"
+            className="relative rounded-l-md "
             placeholder="blur"
             blurDataURL={posterUrl}
             layout="fill"
-            objectFit="cover"
             src={posterUrl}
             alt={title}
           />
         </Link>
       </button>
 
-      <div className="grid grid-cols-1 gap-4 w-8/12 py-2 px-3">
+      <div className="grid grid-cols-1 gap-4 w-8/12 py-5 px-3">
         <div className="grid grid cols-1">
           <Link href={pathUrl} passHref>
-            <p className="align-middle text-base font-bold">{title}</p>
+            <p className="align-middle text-base font-bold mobile:text-sm">
+              {title}
+            </p>
           </Link>
-          <p className="text-gray-400 align-middle text-sm">{handlingDate}</p>
+          <p className="text-gray-400 align-middle text-sm mobile:text-xs">
+            {handlingDate}
+          </p>
         </div>
         {content.overview ? overviewRender() : <></>}
       </div>

@@ -27,14 +27,13 @@ const ContentListContainer = ({ datas, target, categories, title }: Props) => {
   };
   const data =
     title === "개봉 예정 영화" ? datas.results : datas[currentCategory].results;
-
   return (
-    <div className="my-10">
+    <div className="my-15 mobile:my-5">
       <div className="flex flex-row my-3 px-5">
         <div className="flex items-center">
-          <h2 className="text-2xl font-bold">{title}</h2>
+          <h2 className="text-2xl font-bold mobile:text-xl">{title}</h2>
         </div>
-        {title === "개봉 예정 영화" ? null : (
+        {categories.length > 2 ? null : (
           <CategoryBtn
             categories={categories}
             currentCategory={currentCategory}
