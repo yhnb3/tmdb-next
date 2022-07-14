@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { Pagination } from "./shared";
+import NoResult from "components/shared/NoResult";
 
 interface Props {
   persons: Array<PersonPage>;
@@ -97,5 +98,5 @@ export default function PersonResult({
       </div>
     );
   }
-  return <p>검색결과가 없습니다.</p>;
+  return <NoResult />;
 }

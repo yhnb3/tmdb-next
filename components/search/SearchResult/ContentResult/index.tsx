@@ -2,6 +2,7 @@ import * as React from "react";
 import { SearchContent } from "components/shared";
 import Content from "./Content";
 import { Pagination } from "../shared";
+import NoResult from "components/shared/NoResult";
 
 interface Content {
   title?: string;
@@ -53,7 +54,7 @@ const ContentResult: React.FC<Props> = ({
       </div>
     );
   }
-  return <div className="mt-5">검색결과가 없습니다.</div>;
+  return <NoResult />;
 };
 
 export default ContentResult;
