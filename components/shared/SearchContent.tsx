@@ -19,7 +19,7 @@ interface Props {
 const SearchContent = ({ content }: Props) => {
   const title = content.title || content.name;
   const posterUrl = content.poster_path
-    ? `https://image.tmdb.org/t/p/w300/${content.poster_path}`
+    ? `https://image.tmdb.org/t/p/w300${content.poster_path}`
     : "https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg";
   const pathUrl = content.title ? `/movie/${content.id}` : `/tv/${content.id}`;
   const date = content.release_date || content.first_air_date;
@@ -40,22 +40,22 @@ const SearchContent = ({ content }: Props) => {
     return <></>;
   }
   return (
-    <div className="flex mt-5 border-gray-300 border rounded-md w-6/8">
-      <Link href={pathUrl} passHref>
-        <button>
+    <div className="flex mt-5 border-gray-300 border rounded-md w-6/8 h-48">
+      <button className="relative w-32">
+        <Link href={pathUrl} passHref>
           <Image
+            className="relative h-full w-40 rounded-l-md"
             placeholder="blur"
             blurDataURL={posterUrl}
-            height={144}
-            width={96}
+            layout="fill"
             objectFit="cover"
-            className="rounded-l-md"
             src={posterUrl}
-            alt=""
+            alt={title}
           />
-        </button>
-      </Link>
-      <div className="grid grid-cols-1 gap-4 w-8/12 py-5 px-3">
+        </Link>
+      </button>
+
+      <div className="grid grid-cols-1 gap-4 w-8/12 py-2 px-3">
         <div className="grid grid cols-1">
           <Link href={pathUrl} passHref>
             <p className="align-middle text-base font-bold">{title}</p>

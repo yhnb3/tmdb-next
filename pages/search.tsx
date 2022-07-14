@@ -84,7 +84,7 @@ export default function Search({ isMobileDevice }) {
               <div className="ml-4 text-white font-bold">Search Result</div>
             </div>
             <div>
-              <div className="mt-2 my-5 mobile:flex-row mobile:flex mobile:my-0">
+              <div className="mt-2 my-5 mobile:flex-row mobile:flex mobile:my-0 mobile:whitespace-nowrap mobile:overflow-auto">
                 {initialLoading ? null : (
                   <ResultSummary
                     movieData={movieData}

@@ -45,7 +45,7 @@ const Poster = ({ content }: Props) => {
                 layout="fill"
                 className="rounded-lg object-cover mx-auto"
                 src={posterUrl}
-                alt=""
+                alt="title"
               />
             </div>
           </a>

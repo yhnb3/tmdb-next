@@ -9,7 +9,7 @@ interface Props {
 
 export default function PersonMobileDetail({ person }: Props) {
   return (
-    <div className="flex flex-col pt-20 px-4 pb-24">
+    <div className="flex flex-col pt-10 px-4 pb-24">
       <div className="mx-auto">
         <Image
           placeholder="blur"

@@ -49,7 +49,7 @@ export default function MobileDetail({ content }: Props) {
   );
 
   return (
-    <div className="mt-10">
+    <div>
       <div className="h-40 relative">
         <div className="w-full h-40">
           <Image
