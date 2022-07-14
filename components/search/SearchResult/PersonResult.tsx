@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { Pagination } from "./shared";
-import NoResult from "components/shared/NoResult";
+import { NoResult } from "components/shared";
 
 interface Props {
   persons: Array<PersonPage>;

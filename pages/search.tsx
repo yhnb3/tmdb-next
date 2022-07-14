@@ -13,6 +13,7 @@ import useSearchInfiniteFetchData from "hooks/useSearchInfiniteFetchData";
 import { AppState } from "app/store";
 import { changeSection } from "app/search/searchSlice";
 import { Input, ResultSummary, SearchResult } from "components/search";
+import { Loading } from "components/shared";
 
 export default function Search({ isMobileDevice }) {
   const router = useRouter();
@@ -77,44 +78,48 @@ export default function Search({ isMobileDevice }) {
         <meta name="description" content="Helmet application" />
       </Head>
       <Input query={query} />
-      <div className="flex flex-row w-screen mx-auto mobile:flex-col mobile:w-full">
-        <div className="w-4/12 pt-10 pr-10 mobile:w-full mobile:p-0">
-          <div className="rounded-lg border border-gray-200 mobile:rounded-none">
-            <div className="h-16 w-full bg-blue-400 rounded-t-lg flex items-center mobile:rounded-none">
-              <div className="ml-4 text-white font-bold">Search Result</div>
-            </div>
-            <div>
-              <div className="mt-2 my-5 mobile:flex-row mobile:flex mobile:my-0 mobile:whitespace-nowrap mobile:overflow-auto">
-                {initialLoading ? null : (
-                  <ResultSummary
-                    movieData={movieData}
-                    personData={personData}
-                    tvData={tvData}
-                    currentSection={section}
-                    setSection={setSection}
-                  />
-                )}
+      {initialLoading ? (
+        <Loading />
+      ) : (
+        <div className="flex flex-row w-screen mx-auto mobile:flex-col mobile:w-full">
+          <div className="w-4/12 pt-10 pr-10 mobile:w-full mobile:p-0">
+            <div className="rounded-lg border border-gray-200 mobile:rounded-none">
+              <div className="h-16 w-full bg-blue-400 rounded-t-lg flex items-center mobile:rounded-none">
+                <div className="ml-4 text-white font-bold">Search Result</div>
+              </div>
+              <div>
+                <div className="mt-2 my-5 mobile:flex-row mobile:flex mobile:my-0 mobile:whitespace-nowrap mobile:overflow-auto">
+                  {initialLoading ? null : (
+                    <ResultSummary
+                      movieData={movieData}
+                      personData={personData}
+                      tvData={tvData}
+                      currentSection={section}
+                      setSection={setSection}
+                    />
+                  )}
+                </div>
               </div>
             </div>
           </div>
+          <div className="w-8/12 mobile:w-full mobile:px-5">
+            <SearchResult
+              isMobile={isMobileDevice}
+              currentSection={section}
+              tvData={tvData}
+              movieData={movieData}
+              personData={personData}
+              movieCurrentPage={movieSize}
+              movieSetCurrentPage={movieSetSize}
+              tvCurrentPage={tvSize}
+              tvSetCurrentPage={tvSetSize}
+              personCurrentPage={personSize}
+              personSetCurrentPage={personSetSize}
+              loading={loading}
+            />
+          </div>
         </div>
-        <div className="w-8/12 mobile:w-full mobile:px-5">
-          <SearchResult
-            isMobile={isMobileDevice}
-            currentSection={section}
-            tvData={tvData}
-            movieData={movieData}
-            personData={personData}
-            movieCurrentPage={movieSize}
-            movieSetCurrentPage={movieSetSize}
-            tvCurrentPage={tvSize}
-            tvSetCurrentPage={tvSetSize}
-            personCurrentPage={personSize}
-            personSetCurrentPage={personSetSize}
-            loading={loading}
-          />
-        </div>
-      </div>
+      )}
     </div>
   );
 }

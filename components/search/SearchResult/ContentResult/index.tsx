@@ -2,7 +2,7 @@ import * as React from "react";
 import { SearchContent } from "components/shared";
 import Content from "./Content";
 import { Pagination } from "../shared";
-import NoResult from "components/shared/NoResult";
+import { NoResult } from "components/shared";
 
 interface Content {
   title?: string;
