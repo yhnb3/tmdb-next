@@ -1,10 +1,17 @@
-import { useState, MouseEvent } from "react";
+import { MouseEvent, SetStateAction, Dispatch } from "react";
 import SideBtn from "../../SideBtn";
+
+interface ISubMenuVisible {
+  movie: boolean;
+  tv: boolean;
+  person: boolean;
+}
 
 interface Props {
   sideVisible: boolean;
   handleSide: () => void;
-  count: number;
+  subMenuVisible: ISubMenuVisible;
+  setSubMenuVisible: Dispatch<SetStateAction<ISubMenuVisible>>;
 }
 
 const MOVIE = [
@@ -18,13 +25,12 @@ const TV = [
   { href: "/tv/top_rated", name: "평점 높은" },
 ];
 
-export default function MobileSide({ sideVisible, handleSide, count }: Props) {
-  const [subMenuVisible, setSubMenuVisible] = useState({
-    movie: false,
-    tv: false,
-    person: false,
-  });
-
+export default function MobileSide({
+  sideVisible,
+  handleSide,
+  subMenuVisible,
+  setSubMenuVisible,
+}: Props) {
   const handleSubMenu = (event: MouseEvent<HTMLButtonElement>) => {
     const { category } = event.currentTarget.dataset;
     setSubMenuVisible({
@@ -32,11 +38,10 @@ export default function MobileSide({ sideVisible, handleSide, count }: Props) {
       [category]: !subMenuVisible[category],
     });
   };
-
   return (
-    <div
-      className={`fixed visible top-20 w-80 min-h-screen z-50 bg-blue-800 opacity-95 ${
-        count === 0
+    <nav
+      className={`fixed visible top-16 w-80 min-h-screen z-50 bg-blue-800 opacity-95 ${
+        sideVisible === undefined
           ? "-left-80"
           : sideVisible
           ? "animate-show-side left-0"
@@ -114,6 +119,6 @@ export default function MobileSide({ sideVisible, handleSide, count }: Props) {
           />
         </ul>
       </div>
-    </div>
+    </nav>
   );
 }
