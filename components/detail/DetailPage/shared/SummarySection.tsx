@@ -26,8 +26,8 @@ interface Props {
 const SummarySection: React.FC<Props> = ({ content }: Props) => {
   const section = content.title ? "movie" : "tv";
   const date = content.title ? content.release_date : content.first_air_date;
-  const backdropUrl = `https://image.tmdb.org/t/p/original/${content.backdrop_path}`;
-  const posterUrl = `https://image.tmdb.org/t/p/w300/${content.poster_path}`;
+  const backdropUrl = `https://image.tmdb.org/t/p/original${content.backdrop_path}`;
+  const posterUrl = `https://image.tmdb.org/t/p/w300${content.poster_path}`;
   const title = content.title || content.name;
 
   const endPoint = `https://api.themoviedb.org/3/${section}/${content.id}/watch/providers?api_key=${process.env.NEXT_PUBLIC_API_CODE}`;

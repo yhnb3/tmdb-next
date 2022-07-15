@@ -41,18 +41,20 @@ const SearchContent = ({ content }: Props) => {
   }
   return (
     <div className="flex mt-5 border-gray-300 border rounded-md w-6/8 h-48 mobile:h-36">
-      <button className="relative h-48 w-32 mobile:h-36 mobile:w-24">
-        <Link href={pathUrl} passHref>
-          <Image
-            className="relative rounded-l-md "
-            placeholder="blur"
-            blurDataURL={posterUrl}
-            layout="fill"
-            src={posterUrl}
-            alt={title}
-          />
-        </Link>
-      </button>
+      <Link href={pathUrl}>
+        <a>
+          <div className="relative h-48 w-32 mobile:h-36 mobile:w-24 cursor-pointer">
+            <Image
+              className="rounded-l-md"
+              placeholder="blur"
+              blurDataURL={posterUrl}
+              layout="fill"
+              src={posterUrl}
+              alt={title}
+            />
+          </div>
+        </a>
+      </Link>
 
       <div className="grid grid-cols-1 gap-4 w-8/12 py-5 px-3">
         <div className="grid grid cols-1">

@@ -1,18 +1,29 @@
 import type { ReactElement } from "react";
 import Head from "next/head";
+import Image from "next/image";
 import { GetStaticProps } from "next/types";
 
 import { Layout } from "components/shared";
 import { SectionList } from "components/homepage";
 
 export default function Home({ data }) {
+  const mainImageSrc = `https://image.tmdb.org/t/p/original${data[2].datas["이번주"].results[0].backdrop_path}`;
   return (
-    <div className="mx-auto w-screen mobile:mx-0 mobile:w-full">
-      <div className="h-80 w-full bg-blue-200 mobile:h-60 ">
+    <div className="relative mx-auto w-screen mobile:mx-0 mobile:w-full ">
+      <div className="absolute top-0 left-0 w-full h-80 -z-10 mobile:h-60">
+        <Image
+          layout="fill"
+          src={mainImageSrc}
+          alt="main image"
+          objectFit="cover"
+          objectPosition={"50% 0"}
+        />
+      </div>
+      <div className="h-80 w-full mobile:h-60 bg-black bg-opacity-40">
         <div className="py-20 mx-auto w-11/12 h-2/4 mobile:py-5">
-          <hgroup className="flex-wrap">
-            <h1 className="text-4xl">Welcome.</h1>
-            <p className="text-2xl">
+          <hgroup className="flex-wrap text-white mobile:mb-8 mobile:mt-4">
+            <h1 className="text-4xl mobile:text-2xl">Welcome.</h1>
+            <p className="text-2xl mobile:text-base">
               Millions of movies, TV shows and people to discover. Explore now.
             </p>
           </hgroup>

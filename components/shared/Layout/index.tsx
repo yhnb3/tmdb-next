@@ -13,18 +13,30 @@ interface Props {
 const MobileSide = dynamic(() => import("./MobileSide"));
 
 function Layout({ children }: Props) {
-  const [sideVisible, setSideVisible] = useState(false);
-  const [cnt, setCnt] = useState(0);
+  const [sideVisible, setSideVisible] = useState<boolean | undefined>(
+    undefined
+  );
+  const [subMenuVisible, setSubMenuVisible] = useState({
+    movie: false,
+    tv: false,
+    person: false,
+  });
 
   const isMobileDevice = isMobile();
 
   const router = useRouter();
   const handleSide = () => {
-    setCnt(cnt + 1);
-    setSideVisible(!sideVisible);
+    if (!sideVisible) {
+      setSubMenuVisible({
+        movie: false,
+        tv: false,
+        person: false,
+      });
+    }
+    setSideVisible((prev) => !prev);
   };
 
-  useEffect(() => setSideVisible(false), [router]);
+  useEffect(() => setSideVisible(undefined), [router]);
 
   return (
     <div className="min-h-screen relative">
@@ -32,11 +44,12 @@ function Layout({ children }: Props) {
       {isMobileDevice ? (
         <MobileSide
           handleSide={handleSide}
-          count={cnt}
           sideVisible={sideVisible}
+          subMenuVisible={subMenuVisible}
+          setSubMenuVisible={setSubMenuVisible}
         />
       ) : null}
-      <main className="pt-20 pb-28">{children}</main>
+      <main className="pt-20 mobile:pt-16 pb-20">{children}</main>
       <Footer />
     </div>
   );
