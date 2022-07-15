@@ -20,3 +20,14 @@
   - loading indicator를 target으로 하여서 구현
   - 더 이상 불러올 page가 없을 경우 loading indicator를 구현 하지 않음으로 로딩을 막을 수 있다.
 - hoc를 hook으로 교체
+
+#### 20220715
+
+- 모바일 UI 변경
+  - Slider내에 스크롤 제거
+  - header, footer 크기 조절
+  - 모바일 폰트 크기 조절
+  - side nav 로직 변경
+- 메인 페이지에 hero-image 추가
+  - 현 시점 기준 일주일 내에 가장 트렌드한 영화의 `backdrop-path`활용
+
