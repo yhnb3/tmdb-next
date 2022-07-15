@@ -47,7 +47,7 @@ const Header: React.FC<props> = ({ handleSide }: props) => {
     };
     window.addEventListener("scroll", handlingHeader);
     return () => window.removeEventListener("scroll", handlingHeader);
-  });
+  }, [headerVisible, scrollY]);
 
   const movieMenus = [
     { url: "popular", name: "인기" },
@@ -64,7 +64,7 @@ const Header: React.FC<props> = ({ handleSide }: props) => {
 
   return (
     <header
-      className={`h-20 w-full bg-blue-900 fixed z-50 ${
+      className={`h-20 mobile:h-16 w-full bg-blue-900 fixed z-50 ${
         typeof window !== "undefined" && window.scrollY >= 100
           ? headerVisible
             ? "animate-show-header top-0"

@@ -2,7 +2,7 @@ import React from "react";
 import { AiFillGithub } from "@react-icons/all-files/ai/AiFillGithub";
 
 const Footer = () => (
-  <footer className="absolute w-full h-20 bg-blue-900 flex items-center bottom-0">
+  <footer className="absolute w-full h-20 mobile:h-16 bg-blue-900 flex items-center bottom-0">
     <div className="flex items-center mx-auto">
       <div>
         <a

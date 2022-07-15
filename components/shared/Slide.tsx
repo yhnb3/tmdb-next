@@ -20,7 +20,7 @@ const Slide: React.FC<Props> = ({ Component, contents }: Props) => {
   return (
     <div className="relative">
       <div
-        className="relative scrollbar-thin scrollbar-thumb-gray-300 scrollbar-thumb-rounded-full overflow-y-hidden overflow-x-auto whitespace-nowrap"
+        className="relative scrollbar-thin scrollbar-thumb-gray-300 scrollbar-thumb-rounded-full mobile:scrollbar-none overflow-y-hidden overflow-x-auto whitespace-nowrap"
         ref={scrollRef}
         onScroll={handleScroll}
       >
