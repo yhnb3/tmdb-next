@@ -11,13 +11,16 @@ export default function Home({ data }) {
   return (
     <div className="relative mx-auto w-screen mobile:mx-0 mobile:w-full ">
       <div className="absolute top-0 left-0 w-full h-80 -z-10 mobile:h-60">
-        <Image
-          layout="fill"
-          src={mainImageSrc}
-          alt="main image"
-          objectFit="cover"
-          objectPosition={"50% 0"}
-        />
+        <div className="relative w-full h-80 mobile:h-60">
+          <Image
+            priority={true}
+            layout="fill"
+            src={mainImageSrc}
+            alt="main image"
+            objectFit="cover"
+            objectPosition={"50% 0"}
+          />
+        </div>
       </div>
       <div className="h-80 w-full mobile:h-60 bg-black bg-opacity-40">
         <div className="py-20 mx-auto w-11/12 h-2/4 mobile:py-5">
