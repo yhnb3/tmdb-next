@@ -1,5 +1,6 @@
 import { MouseEvent, SetStateAction, Dispatch } from "react";
-import SideBtn from "../../SideBtn";
+import SideBtn from "./SideBtn";
+import styles from "./mobileSide.module.scss";
 
 interface ISubMenuVisible {
   movie: boolean;
@@ -38,6 +39,11 @@ export default function MobileSide({
       [category]: !subMenuVisible[category],
     });
   };
+
+  const movieTab = subMenuVisible.movie ? styles["tab__button--open"] : "";
+  const tvTab = subMenuVisible.tv ? styles["tab__button--open"] : "";
+  const personTab = subMenuVisible.person ? styles["tab__button--open"] : "";
+
   return (
     <nav
       className={`fixed visible top-16 w-80 min-h-screen z-50 bg-blue-800 opacity-95 ${
@@ -50,7 +56,7 @@ export default function MobileSide({
     >
       <div className="flex flex-col text-white text-2xl  p-5 ">
         <button
-          className="text-left font-bold"
+          className={`relative text-left font-bold ${styles.tab__button} ${movieTab}`}
           type="button"
           data-category="movie"
           onClick={handleSubMenu}
@@ -75,7 +81,7 @@ export default function MobileSide({
           })}
         </ul>
         <button
-          className="text-left font-bold"
+          className={`relative text-left font-bold ${styles.tab__button} ${tvTab}`}
           type="button"
           data-category="tv"
           onClick={handleSubMenu}
@@ -100,7 +106,7 @@ export default function MobileSide({
           })}
         </ul>
         <button
-          className="text-left font-bold"
+          className={`relative text-left font-bold ${styles.tab__button} ${personTab}`}
           type="button"
           data-category="person"
           onClick={handleSubMenu}

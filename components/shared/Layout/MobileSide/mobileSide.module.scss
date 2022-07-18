@@ -1,0 +1,22 @@
+.tab__button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tab__button::after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  top: 10px;
+  margin-left: 20px;
+  border: 2px solid white;
+  border-top: 0;
+  border-left: 0;
+  transform: rotate(-45deg);
+  transition: transform linear 0.2s;
+}
+
+.tab__button--open::after {
+  transform: rotate(45deg);
+}
