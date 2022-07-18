@@ -18,7 +18,7 @@ export default function Home({ data }) {
             src={mainImageSrc}
             alt="main image"
             objectFit="cover"
-            objectPosition={"50% 0"}
+            objectPosition={"0 50%"}
           />
         </div>
       </div>
@@ -30,7 +30,7 @@ export default function Home({ data }) {
               Millions of movies, TV shows and people to discover. Explore now.
             </h2>
           </hgroup>
-          <div className="relative rounded-full bg-white mt-4">
+          <div className="relative rounded-full bg-white mt-10">
             <form action="/search?" className="h-10 w-full">
               <input
                 className="px-5 py-3 h-10 outline-none rounded-full w-10/12"
