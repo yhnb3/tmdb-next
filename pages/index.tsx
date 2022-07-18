@@ -22,29 +22,30 @@ export default function Home({ data }) {
           />
         </div>
       </div>
-      <div className="h-80 w-full mobile:h-60 bg-black bg-opacity-40">
+      <div className="h-80 w-full mobile:h-60 bg-black bg-opacity-60">
         <div className="py-20 mx-auto w-11/12 h-2/4 mobile:py-5">
           <hgroup className="flex-wrap text-white mobile:mb-8 mobile:mt-4">
-            <h1 className="text-4xl mobile:text-2xl">Welcome.</h1>
-            <p className="text-2xl mobile:text-base">
+            <h1 className="text-4xl mobile:text-2xl font-bold">Welcome.</h1>
+            <h2 className="text-2xl mobile:text-base">
               Millions of movies, TV shows and people to discover. Explore now.
-            </p>
+            </h2>
           </hgroup>
           <div className="relative rounded-full bg-white mt-4">
-            <form action="/search?" className="h-12 w-full">
+            <form action="/search?" className="h-10 w-full">
               <input
-                className="px-5 py-3 outline-none rounded-full w-10/12"
+                className="px-5 py-3 h-10 outline-none rounded-full w-10/12"
                 autoComplete="off"
                 type="text"
                 dir="auto"
                 name="query"
                 placeholder="영화, tv 프로그램 검색..."
               />
-              <input
+              <button
                 type="submit"
-                value="Search"
-                className="absolute h-full rounded-full w-20 right-0 z-10 cursor-pointer bg-cyan-500"
-              />
+                className="absolute h-10 rounded-full w-20 right-0 z-10 cursor-pointer bg-gradient-to-r from-blue-400 to-blue-800 text-white text-sm font-bold"
+              >
+                Search
+              </button>
             </form>
           </div>
         </div>
