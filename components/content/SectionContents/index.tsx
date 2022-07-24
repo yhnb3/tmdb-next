@@ -35,7 +35,6 @@ const SectionContents = ({
     section,
     category,
   });
-
   const mobileContents = useMemo(() => {
     return data.map((contents: { results: Array<Content> }) =>
       contents.results.map((element) => (
@@ -75,9 +74,15 @@ const SectionContents = ({
       <section>
         {isMobile ? mobileContents : webContents}
         {isLoadingVisible ? (
-          <div ref={loadingRef}>
-            <Loading />
-          </div>
+          data.length == 0 ? (
+            <div>
+              <Loading />
+            </div>
+          ) : (
+            <div ref={loadingRef}>
+              <Loading />
+            </div>
+          )
         ) : null}
       </section>
     </div>
