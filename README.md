@@ -31,3 +31,9 @@
 - 메인 페이지에 hero-image 추가
   - 현 시점 기준 일주일 내에 가장 트렌드한 영화의 `backdrop-path`활용
 
+#### 20220724
+
+- 인피니티 스크롤 구현 과정에서 첫번째 data를 불러오는 과정에서 두번째 data까지 한꺼번에 불러와지는 현상 수정
+  - intersection Observer의 타겟이 되는 loading 컴포넌트가 처음 데이터를 렌더링 되는 과정에서 노출 되기 때문에 2번 데이터가 불러와지는 것으로 추정하였음
+  - useInfiniteFetchData hook에서 loading을 이용하여서 data가 fetch되고 있을 때는 ref 프로퍼티에 할당되지 않은 loading 컴포넌트를 노출 시키도록 하였습니다.
+  - 이러면서 새로운 데이터를 가져올 때 마다 페이지가 전체적으로 리렌더링 되는 현상을 막고자 data의 길이가 0이면서 data를 fetch할때만 loading 컴포넌트를 단일로 노출 하도록 수정 하였습니다.

@@ -30,7 +30,7 @@ const SectionContents = ({
 }: IProps) => {
   const loadingRef = useRef<HTMLDivElement | null>(null);
 
-  const { data } = useInfiniteScroll({
+  const { data, loading } = useInfiniteScroll({
     target: loadingRef,
     section,
     category,
@@ -59,8 +59,14 @@ const SectionContents = ({
     );
   }, [data]);
 
-  const isLoadingVisible =
-    data.length === 0 || data[0].total_pages !== data.length;
+  if (loading)
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+
+  const isLoadingVisible = data[0].total_pages !== data.length;
 
   return (
     <div
@@ -74,15 +80,9 @@ const SectionContents = ({
       <section>
         {isMobile ? mobileContents : webContents}
         {isLoadingVisible ? (
-          data.length == 0 ? (
-            <div>
-              <Loading />
-            </div>
-          ) : (
-            <div ref={loadingRef}>
-              <Loading />
-            </div>
-          )
+          <div ref={loadingRef}>
+            <Loading />
+          </div>
         ) : null}
       </section>
     </div>

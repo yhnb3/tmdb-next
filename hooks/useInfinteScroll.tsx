@@ -30,5 +30,6 @@ export const useInfiniteScroll = ({ target, section, category }: IProps) => {
     }
   }, [data.length, setSize, target]);
 
-  return { data, size, loading, error };
+  const initialLoading = loading && data.length == 0;
+  return { data, size, loading: initialLoading, error };
 };
