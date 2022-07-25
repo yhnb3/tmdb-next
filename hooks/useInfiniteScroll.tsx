@@ -1,5 +1,5 @@
 import { MutableRefObject, useEffect, useRef } from "react";
-import useInfiniteFetchData from "./useInfiniteFetchData";
+import { useInfiniteFetchData } from "./useInfiniteFetchData";
 
 interface IProps {
   target: MutableRefObject<Element | null>;
@@ -13,11 +13,12 @@ export const useInfiniteScroll = ({ target, section, category }: IProps) => {
     section,
     category,
   });
+
+  const initialLoading = loading && data.length == 0;
   useEffect(() => {
     if (target.current && !observer.current) {
-      console.log("observer is null");
       observer.current = new IntersectionObserver(
-        (entries, observe) => {
+        (entries, _) => {
           entries.forEach((entry) => {
             entry.isIntersecting && setSize((prev) => prev + 1);
           });
@@ -28,8 +29,10 @@ export const useInfiniteScroll = ({ target, section, category }: IProps) => {
       );
       observer.current.observe(target.current);
     }
-  }, [data.length, setSize, target]);
+    return () => {
+      observer.current = null;
+    };
+  }, [initialLoading, setSize, target]);
 
-  const initialLoading = loading && data.length == 0;
   return { data, size, loading: initialLoading, error };
 };

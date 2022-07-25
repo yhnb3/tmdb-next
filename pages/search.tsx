@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { Layout } from "components/shared";
 import { isMobile } from "libs";
 
-import useSearchInfiniteFetchData from "hooks/useSearchInfiniteFetchData";
+import { useSearchInfiniteFetchData } from "hooks";
 
 import { AppState } from "app/store";
 import { changeSection } from "app/search/searchSlice";

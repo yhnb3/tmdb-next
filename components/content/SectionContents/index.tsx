@@ -1,6 +1,6 @@
 import { Poster, SearchContent } from "components/shared";
 
-import { useInfiniteScroll } from "hooks/useInfinteScroll";
+import { useInfiniteScroll } from "hooks";
 import { useMemo, useRef } from "react";
 import Loading from "../Loading";
 
@@ -35,6 +35,7 @@ const SectionContents = ({
     section,
     category,
   });
+
   const mobileContents = useMemo(() => {
     return data.map((contents: { results: Array<Content> }) =>
       contents.results.map((element) => (
@@ -65,9 +66,7 @@ const SectionContents = ({
         <Loading />
       </div>
     );
-
   const isLoadingVisible = data[0].total_pages !== data.length;
-
   return (
     <div
       className={`mx-auto max-w-screeen ${

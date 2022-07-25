@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
 import PersonList from "./PersonList";
-import { useInfiniteScroll } from "hooks/useInfinteScroll";
+import { useInfiniteScroll } from "hooks";
 import Loading from "../Loading";
 
 interface Person {
