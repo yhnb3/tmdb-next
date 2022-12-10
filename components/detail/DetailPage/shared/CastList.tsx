@@ -1,7 +1,7 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import useFetchData from "../../../../hooks/useFetchData";
+import { useFetchData } from "hooks/useFetchData";
 
 interface Props {
   id: string;

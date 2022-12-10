@@ -2,7 +2,7 @@ import * as React from "react";
 
 import RecomendationPoster from "./RecommendationPoster";
 import Slide from "../../../shared/Slide";
-import useFetchData from "../../../../hooks/useFetchData";
+import { useFetchData } from "hooks/useFetchData";
 
 interface Props {
   id: string;
