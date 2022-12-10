@@ -27,7 +27,7 @@ export default function PersonHistory({ id }: Props) {
                 {contents.data.map((content) => (
                   <div
                     className="flex flex-row"
-                    key={`${job.job}-${content.id}`}
+                    key={`${job.job}-${content.id}-${content.character}`}
                   >
                     <div className="w-10 text-center p-2 text-sm">
                       {contents.date}
