@@ -6,13 +6,11 @@ import { Layout } from "components/shared";
 import { SectionContents } from "components/content";
 
 export default function Popular() {
-  const isMobileDevice = window ? window.innerWidth <= 500 : false;
   return (
     <SectionContents
       section="popular"
       category="tv"
       head_line="인기 TV 프로그램"
-      isMobile={isMobileDevice}
     />
   );
 }

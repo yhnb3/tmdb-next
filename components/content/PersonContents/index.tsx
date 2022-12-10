@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import PersonList from "./PersonList";
 import { useInfiniteScroll } from "hooks";
@@ -19,7 +19,12 @@ interface IProps {
 
 const PersonContents = ({ section, category, head_line }: IProps) => {
   const loadingRef = useRef<HTMLDivElement | null>(null);
-  const isMobile = window.innerWidth <= 500;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(screen.width <= 500);
+  }, []);
+
   const { data } = useInfiniteScroll({
     target: loadingRef,
     section,

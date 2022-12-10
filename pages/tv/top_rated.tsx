@@ -5,13 +5,11 @@ import { Layout } from "components/shared";
 import { SectionContents } from "components/content";
 
 export default function TopRated() {
-  const isMobileDevice = window ? window.innerWidth <= 500 : false;
   return (
     <SectionContents
       section="top_rated"
       category="tv"
       head_line="높은 평점의 TV 프로그램"
-      isMobile={isMobileDevice}
     />
   );
 }

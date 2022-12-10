@@ -1,7 +1,7 @@
 import { Poster, SearchContent } from "components/shared";
 
 import { useInfiniteScroll } from "hooks";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import Loading from "../Loading";
 
 interface Content {
@@ -19,22 +19,24 @@ interface IProps {
   section: string;
   category: string;
   head_line: string;
-  isMobile: boolean;
 }
 
-const SectionContents = ({
-  section,
-  category,
-  head_line,
-  isMobile,
-}: IProps) => {
+const SectionContents = ({ section, category, head_line }: IProps) => {
   const loadingRef = useRef<HTMLDivElement | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    setIsMobile(screen.width <= 500);
+    console.log();
+  }, []);
+
+  console.log(isMobile);
   const { data, loading } = useInfiniteScroll({
     target: loadingRef,
     section,
     category,
   });
+  console.log(data);
 
   const mobileContents = useMemo(() => {
     return data.map((contents: { results: Array<Content> }) =>
