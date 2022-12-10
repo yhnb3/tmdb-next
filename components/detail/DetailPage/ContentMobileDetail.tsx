@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Rate } from "components/shared";
 import { RecommendationSection, MobileCastList, ImportantCrew } from "./shared";
 
-import useFetchData from "hooks/useFetchData";
+import { useFetchData } from "hooks/useFetchData";
 
 import { Content } from "../types";
 
