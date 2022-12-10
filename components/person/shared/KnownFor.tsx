@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import useFetchData from "../../../hooks/useFetchData";
+import { useFetchData } from "hooks/useFetchData";
 import Slide from "../../shared/Slide";
 
 interface Props {

@@ -5,7 +5,7 @@ import { AiOutlineLink } from "@react-icons/all-files/ai/AiOutlineLink";
 
 import { Person } from "../types";
 
-import useFetchData from "../../../hooks/useFetchData";
+import { useFetchData } from "hooks/useFetchData";
 
 interface Props {
   person: Person;
