@@ -15,12 +15,11 @@ interface IProps {
   section: string;
   category: string;
   head_line: string;
-  isMobile: boolean;
 }
 
-const PersonContents = ({ section, category, head_line, isMobile }: IProps) => {
+const PersonContents = ({ section, category, head_line }: IProps) => {
   const loadingRef = useRef<HTMLDivElement | null>(null);
-
+  const isMobile = window.innerWidth <= 500;
   const { data } = useInfiniteScroll({
     target: loadingRef,
     section,

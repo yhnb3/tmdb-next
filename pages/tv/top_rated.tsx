@@ -6,7 +6,8 @@ import { Layout } from "components/shared";
 import { SectionContents } from "components/content";
 import { isMobile } from "libs";
 
-export default function TopRated({ isMobileDevice }) {
+export default function TopRated() {
+  const isMobileDevice = window.innerWidth <= 500;
   return (
     <SectionContents
       section="top_rated"
@@ -17,14 +18,6 @@ export default function TopRated({ isMobileDevice }) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const isMobileDevice = isMobile(context.req);
-  return {
-    props: {
-      isMobileDevice,
-    },
-  };
-};
 TopRated.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>

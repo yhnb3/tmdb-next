@@ -6,25 +6,11 @@ import { Layout } from "components/shared";
 import { PersonContents } from "components/content";
 import { isMobile } from "libs";
 
-export default function Popular({ isMobileDevice }) {
+export default function Popular() {
   return (
-    <PersonContents
-      section="popular"
-      category="person"
-      head_line="인기 인물"
-      isMobile={isMobileDevice}
-    />
+    <PersonContents section="popular" category="person" head_line="인기 인물" />
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const isMobileDevice = isMobile(context.req);
-  return {
-    props: {
-      isMobileDevice,
-    },
-  };
-};
 
 Popular.getLayout = function getLayout(page: ReactElement) {
   return (

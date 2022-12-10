@@ -6,7 +6,8 @@ import { Layout } from "components/shared";
 import { SectionContents } from "components/content";
 import { isMobile } from "libs";
 
-export default function Popular({ isMobileDevice }) {
+export default function Popular() {
+  const isMobileDevice = window.innerWidth <= 500;
   return (
     <SectionContents
       section="popular"
@@ -16,15 +17,6 @@ export default function Popular({ isMobileDevice }) {
     />
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const isMobileDevice = isMobile(context.req);
-  return {
-    props: {
-      isMobileDevice,
-    },
-  };
-};
 
 Popular.getLayout = function getLayout(page: ReactElement) {
   return (

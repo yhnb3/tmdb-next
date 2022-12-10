@@ -6,7 +6,8 @@ import { Layout } from "components/shared";
 import { SectionContents } from "components/content";
 import { isMobile } from "libs";
 
-export default function NowPlaying({ isMobileDevice }) {
+export default function NowPlaying() {
+  const isMobileDevice = window.innerWidth <= 500;
   return (
     <SectionContents
       section="now_playing"
@@ -16,15 +17,6 @@ export default function NowPlaying({ isMobileDevice }) {
     />
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const isMobileDevice = isMobile(context.req);
-  return {
-    props: {
-      isMobileDevice,
-    },
-  };
-};
 
 NowPlaying.getLayout = function getLayout(page: ReactElement) {
   return (
