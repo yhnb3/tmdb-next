@@ -7,7 +7,7 @@ import { SectionContents } from "components/content";
 import { isMobile } from "libs";
 
 export default function NowPlaying() {
-  const isMobileDevice = window.innerWidth <= 500;
+  const isMobileDevice = window ? window.innerWidth <= 500 : false;
   return (
     <SectionContents
       section="now_playing"

@@ -1,14 +1,12 @@
 import type { ReactElement } from "react";
-import { GetServerSideProps } from "next/types";
 import Head from "next/head";
 
 import { Layout } from "components/shared";
 
 import { SectionContents } from "components/content";
-import { isMobile } from "libs";
 
 export default function Popular() {
-  const isMobileDevice = window.innerWidth <= 500;
+  const isMobileDevice = window ? window.innerWidth <= 500 : false;
   return (
     <SectionContents
       section="popular"

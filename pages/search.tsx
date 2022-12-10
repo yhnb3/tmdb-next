@@ -87,18 +87,16 @@ export default function Search({ isMobileDevice }) {
               <div className="h-16 w-full bg-blue-400 rounded-t-lg flex items-center mobile:rounded-none">
                 <div className="ml-4 text-white font-bold">Search Result</div>
               </div>
-              <div>
-                <div className="mt-2 my-5 mobile:flex-row mobile:flex mobile:my-0 mobile:whitespace-nowrap mobile:overflow-auto">
-                  {initialLoading ? null : (
-                    <ResultSummary
-                      movieData={movieData}
-                      personData={personData}
-                      tvData={tvData}
-                      currentSection={section}
-                      setSection={setSection}
-                    />
-                  )}
-                </div>
+              <div className="mt-2 my-5 mobile:flex-row mobile:flex mobile:my-0 mobile:whitespace-nowrap mobile:overflow-auto">
+                {initialLoading ? null : (
+                  <ResultSummary
+                    movieData={movieData}
+                    personData={personData}
+                    tvData={tvData}
+                    currentSection={section}
+                    setSection={setSection}
+                  />
+                )}
               </div>
             </div>
           </div>

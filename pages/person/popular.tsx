@@ -1,10 +1,8 @@
 import type { ReactElement } from "react";
-import { GetServerSideProps } from "next/types";
 import Head from "next/head";
 
 import { Layout } from "components/shared";
 import { PersonContents } from "components/content";
-import { isMobile } from "libs";
 
 export default function Popular() {
   return (
