@@ -1,41 +1,39 @@
-import type { ReactElement } from "react";
+import { ReactElement } from "react";
 import { GetServerSideProps } from "next/types";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import axios from "axios";
 
 import { Layout } from "components/shared";
-import { isMobile } from "libs";
 import { PersonDetail, PersonMobileDetail } from "components/person";
+import { useIsMobile, useFetchData } from "hooks";
+import Loading from "components/content/Loading";
 
-export default function Detail({ data, isMobileDevice }) {
+export default function Detail() {
+  const isMobile = useIsMobile();
+  const router = useRouter();
+  const { id } = router.query;
+  const endPoint = `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko`;
+  const { data, loading } = useFetchData({ endPoint });
+
+  const detailPage = isMobile ? (
+    <PersonMobileDetail person={data} />
+  ) : (
+    <PersonDetail person={data} />
+  );
+
+  if (loading) return <Loading />;
+
   return (
     <>
       <Head>
         <title>{data.name}</title>
       </Head>
-      {isMobileDevice ? (
-        <PersonMobileDetail person={data} />
-      ) : (
-        <PersonDetail person={data} />
-      )}
+      {detailPage}
     </>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const isMobileDevice = isMobile(context.req);
-  const data = await axios
-    .get(
-      `https://api.themoviedb.org/3/person/${context.params.id}?api_key=${process.env.NEXT_PUBLIC_API_CODE}&language=ko`
-    )
-    .then((res) => res.data);
-  return {
-    props: {
-      data,
-      isMobileDevice,
-    },
-  };
-};
 Detail.getLayout = function getLayout(page: ReactElement) {
   return (
     <Layout>
