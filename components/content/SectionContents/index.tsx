@@ -27,10 +27,8 @@ const SectionContents = ({ section, category, head_line }: IProps) => {
 
   useEffect(() => {
     setIsMobile(screen.width <= 500);
-    console.log();
   }, []);
 
-  console.log(isMobile);
   const { data, loading } = useInfiniteScroll({
     target: loadingRef,
     section,
