@@ -30,16 +30,13 @@ export default function searchContent({ content }: Props) {
     : "미정";
 
   const overviewRender = () => (
-    <p className="max-h-12 overflow-ellipsis overflow-hidden line-clamp-2 mobile:text-sm">
+    <p className="max-h-12 overflow-ellipsis overflow-hidden line-clamp-2 mobile:text-sm mobile:max-h-10">
       {content.overview}
     </p>
   );
 
-  if (!content.poster_path) {
-    return null;
-  }
   return (
-    <div className="flex mt-10 border-gray-300 border rounded-md w-6/8 mobile:mt-5">
+    <div className="flex mt-10 mb-10 border-gray-300 border rounded-md w-6/8 mobile:mt-5 mobile:mb-0">
       <Link href={pathUrl} passHref>
         <button>
           <div className="relative w-img h-img">
