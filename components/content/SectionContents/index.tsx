@@ -3,6 +3,7 @@ import { Poster, SearchContent } from "components/shared";
 import { useInfiniteScroll, useIsMobile } from "hooks";
 import { useMemo, useRef } from "react";
 import Loading from "../Loading";
+import MobileContentLoading from "../Loading/MobileContentLoading";
 
 interface Content {
   title?: string;
@@ -30,7 +31,6 @@ const SectionContents = ({ section, category, head_line }: IProps) => {
     section,
     category,
   });
-  console.log(data);
 
   const mobileContents = useMemo(() => {
     return data.map((contents: { results: Array<Content> }) =>
@@ -58,8 +58,15 @@ const SectionContents = ({ section, category, head_line }: IProps) => {
 
   if (loading)
     return (
-      <div>
-        <Loading />
+      <div
+        className={`mx-auto max-w-screeen ${
+          isMobile ? "px-5 w-full mt-10" : "w-screen pt-10"
+        }`}
+      >
+        <h1 className={`${isMobile ? "text-xl" : "text-4xl"} font-bold`}>
+          {head_line}
+        </h1>
+        <section>{isMobile ? <MobileContentLoading /> : <Loading />}</section>
       </div>
     );
   const isLoadingVisible = data[0].total_pages !== data.length;
