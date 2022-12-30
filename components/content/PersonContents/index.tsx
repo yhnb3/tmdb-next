@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 
 import PersonList from "./PersonList";
 import { useInfiniteScroll, useIsMobile } from "hooks";

@@ -1,3 +1,4 @@
+import { useIsMobile } from "hooks";
 import * as React from "react";
 
 import ContentResult from "./ContentResult";
@@ -47,10 +48,10 @@ interface Props {
   tvSetCurrentPage: (page: number) => void;
   personSetCurrentPage: (page: number) => void;
   loading: boolean;
-  isMobile: boolean;
 }
 
 const SearchResult = (props: Props) => {
+  const isMobile = useIsMobile()
   if (props.loading) return <p>로딩중...</p>;
   if (props.currentSection === "person")
     return (
@@ -63,7 +64,7 @@ const SearchResult = (props: Props) => {
   if (props.currentSection === "movie")
     return (
       <ContentResult
-        isMobile={props.isMobile}
+        isMobile={isMobile}
         contents={props.movieData}
         currentPage={props.movieCurrentPage}
         handlePage={props.movieSetCurrentPage}
@@ -71,7 +72,7 @@ const SearchResult = (props: Props) => {
     );
   return (
     <ContentResult
-      isMobile={props.isMobile}
+      isMobile={isMobile}
       contents={props.tvData}
       currentPage={props.tvCurrentPage}
       handlePage={props.tvSetCurrentPage}

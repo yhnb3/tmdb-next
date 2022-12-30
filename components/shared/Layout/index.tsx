@@ -3,8 +3,8 @@ import Header from "./Header";
 import dynamic from "next/dynamic";
 
 import { useRouter } from "next/router";
-import { isMobile } from "libs";
 import { ReactNode, useEffect, useState } from "react";
+import { useIsMobile } from "hooks";
 
 interface Props {
   children: ReactNode;
@@ -22,7 +22,7 @@ function Layout({ children }: Props) {
     person: false,
   });
 
-  const isMobileDevice = isMobile();
+  const isMobile = useIsMobile();
 
   const router = useRouter();
   const handleSide = () => {
@@ -41,7 +41,7 @@ function Layout({ children }: Props) {
   return (
     <div className="min-h-screen relative">
       <Header handleSide={handleSide} />
-      {isMobileDevice ? (
+      {isMobile ? (
         <MobileSide
           handleSide={handleSide}
           sideVisible={sideVisible}

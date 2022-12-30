@@ -1,12 +1,10 @@
 import { ReactElement, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { GetServerSideProps } from "next/types";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
 import { Layout } from "components/shared";
-import { isMobile } from "libs";
 
 import { useSearchInfiniteFetchData } from "hooks";
 
@@ -15,7 +13,7 @@ import { changeSection } from "app/search/searchSlice";
 import { Input, ResultSummary, SearchResult } from "components/search";
 import { Loading } from "components/shared";
 
-export default function Search({ isMobileDevice }) {
+export default function Search() {
   const router = useRouter();
   const { query } = router.query;
 
@@ -102,7 +100,6 @@ export default function Search({ isMobileDevice }) {
           </div>
           <div className="w-8/12 mobile:w-full mobile:px-5">
             <SearchResult
-              isMobile={isMobileDevice}
               currentSection={section}
               tvData={tvData}
               movieData={movieData}
@@ -121,15 +118,6 @@ export default function Search({ isMobileDevice }) {
     </div>
   );
 }
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const isMobileDevice = isMobile(context.req);
-  return {
-    props: {
-      isMobileDevice,
-    },
-  };
-};
 
 Search.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
