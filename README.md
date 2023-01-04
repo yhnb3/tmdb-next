@@ -48,3 +48,23 @@
 
 - `useIsMobile`에서 `useEffect`로 `isMobile`여부를 확인 할시에는 `mobile`로 판단될 시에 `mobile`화면이 아닌 다른 화면이 페인트 되었다가 다시 `mobile`컴포넌트로 페인트 되는것을 볼 수 잇는데 이를 `useLayoutEffect`를 이용하여 화면을 페인트 하기 전에 `isMobil`여부를 판단할 수 있게 하여서 좀 더 좋은 유저 경험을 줄 수 있게 되었습니다.
 - 그리고 화면이 로딩 될때 모두 일관적인 회전하는 로딩 인디케이터를 보여주는 것이 아닌 로딩 될 컴포넌트에 맞는 모양을 보여줌으로써 조금 덜 지루한 로딩경험을 가질 수 있게 하였습니다. - 현재 일부 적용중 이지만 계속해서 확장될 예정 입니다.
+
+#### 20231004
+
+- `useIsMobile`훅은 `useLayoutEffect`를 이용한 훅이라 `server side`에서는 실행이 되면 안됩니다. 그래서 
+
+  ```jsx
+  const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
+  // 출처 : https://github.com/reduxjs/react-redux/blob/8605088606403f6909597405c67db91d907db86e/src/components/connectAdvanced.js#L35-L41
+  ```
+
+  위와 같이 `window`가 `undefined`일때는 `server side`이므로 `useLayoutEffect`가 아닌 `useEffect`로 대체 함으로써 해결 하였습니다.
+
+- Search Page 리팩토링
+
+  - 데이터 패칭 하는 `hook`만들기
+  - 데이터 패칭하는 동안 모든 페이지가 아닌 데이터가 필요한 페이지만 로딩 컴포넌트로 표시
+  - css 정리.
+    - 필요없는 `flex` 삭제
+    - 필요없는 `div` 삭제
+    - 데이터 없는 페이지 더 보기 좋게 수정
