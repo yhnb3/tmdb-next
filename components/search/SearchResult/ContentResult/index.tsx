@@ -34,7 +34,7 @@ const ContentResult: React.FC<Props> = ({
 }: Props) => {
   if (contents[0].results.length > 0) {
     return (
-      <div>
+      <>
         {contents[currentPage - 1].results.map((element: Content) =>
           isMobile ? (
             <SearchContent key={element.id} content={element} />
@@ -51,7 +51,7 @@ const ContentResult: React.FC<Props> = ({
         ) : (
           <></>
         )}
-      </div>
+      </>
     );
   }
   return <NoResult />;

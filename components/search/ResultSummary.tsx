@@ -46,9 +46,21 @@ const ResultSummary = ({
   };
 
   const results = [
-    { section: "영화", name: "movie", count: movieData[0].total_results },
-    { section: "TV 프로그램", name: "tv", count: tvData[0].total_results },
-    { section: "인물", name: "person", count: personData[0].total_results },
+    {
+      section: "영화",
+      name: "movie",
+      count: movieData[0] ? movieData[0].total_results : 0,
+    },
+    {
+      section: "TV 프로그램",
+      name: "tv",
+      count: tvData[0] ? tvData[0].total_results : 0,
+    },
+    {
+      section: "인물",
+      name: "person",
+      count: personData[0] ? personData[0].total_results : 0,
+    },
   ];
 
   return (

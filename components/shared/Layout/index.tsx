@@ -49,7 +49,9 @@ function Layout({ children }: Props) {
           setSubMenuVisible={setSubMenuVisible}
         />
       ) : null}
-      <main className="pt-20 mobile:pt-16 pb-20">{children}</main>
+      <main className="pt-20 mobile:pt-16 pb-20 mobile:h-screen">
+        {children}
+      </main>
       <Footer />
     </div>
   );
