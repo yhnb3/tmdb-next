@@ -98,5 +98,9 @@ export default function PersonResult({
       </div>
     );
   }
-  return <NoResult />;
+  return (
+    <div className="pt-20">
+      <NoResult />
+    </div>
+  );
 }

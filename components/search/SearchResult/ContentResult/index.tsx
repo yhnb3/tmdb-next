@@ -54,7 +54,11 @@ const ContentResult: React.FC<Props> = ({
       </>
     );
   }
-  return <NoResult />;
+  return (
+    <div className="pt-20">
+      <NoResult />
+    </div>
+  );
 };
 
 export default ContentResult;
