@@ -3,13 +3,14 @@ import Link from "next/link";
 import { GiHamburgerMenu } from "@react-icons/all-files/gi/GiHamburgerMenu";
 
 import HeaderBtn from "./HeaderBtn";
-import { useEffect, useState } from "react";
+import { MutableRefObject, useEffect, useState } from "react";
 
 interface props {
   handleSide: () => void;
+  sideBtnRef: MutableRefObject<null>;
 }
 
-const Header: React.FC<props> = ({ handleSide }: props) => {
+const Header: React.FC<props> = ({ handleSide, sideBtnRef }: props) => {
   const [movieIsVisible, setMovieIsVisible] = useState<boolean>(false);
   const [tvIsVisible, setTvIsVisible] = useState<boolean>(false);
   const [personIsVisible, setPersonIsVisible] = useState<boolean>(false);
@@ -73,7 +74,7 @@ const Header: React.FC<props> = ({ handleSide }: props) => {
       }`}
     >
       <div className="flex h-full w-screen mx-auto items-center mobile:px-0 mobile:w-full mobile:justify-between relative">
-        <button type="button" onClick={() => handleSide()}>
+        <button type="button" ref={sideBtnRef} onClick={handleSide}>
           <GiHamburgerMenu className="w-20 h-8 text-white hidden mobile:block" />
         </button>
         <Link href="/" passHref>

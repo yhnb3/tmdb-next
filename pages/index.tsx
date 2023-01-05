@@ -1,15 +1,29 @@
-import type { ReactElement } from "react";
+import { FormEventHandler, ReactElement, useRef } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { GetStaticProps } from "next/types";
 
 import { Layout } from "components/shared";
 import { SectionList } from "components/homepage";
+import { useRouter } from "next/router";
 
 export default function Home({ data }) {
   const mainImageSrc = `https://image.tmdb.org/t/p/original${data[2].datas["이번주"].results[0].backdrop_path}`;
+  const inputRef = useRef(null);
+  const router = useRouter();
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    if (!inputRef.current?.value.trim()) return;
+    inputRef.current &&
+      router.push({
+        pathname: "/search",
+        query: { query: inputRef.current.value },
+      });
+  };
+
   return (
-    <div className="relative mx-auto w-screen mobile:mx-0 mobile:w-full ">
+    <div className="relative mx-auto w-screen mobile:mx-0 mobile:w-full">
       <div className="absolute top-0 left-0 w-full h-80 -z-10 mobile:h-60">
         <div className="relative w-full h-80 mobile:h-60">
           <Image
@@ -31,8 +45,9 @@ export default function Home({ data }) {
             </h2>
           </hgroup>
           <div className="relative rounded-full bg-white mt-10">
-            <form action="/search?" className="h-10 w-full">
+            <form onSubmit={handleSubmit} className="h-10 w-full">
               <input
+                ref={inputRef}
                 className="px-5 py-3 h-10 outline-none rounded-full w-10/12"
                 autoComplete="off"
                 type="text"

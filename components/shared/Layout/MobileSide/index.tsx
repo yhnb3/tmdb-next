@@ -1,4 +1,4 @@
-import { MouseEvent, SetStateAction, Dispatch } from "react";
+import { MouseEvent, SetStateAction, Dispatch, MutableRefObject } from "react";
 import SideBtn from "./SideBtn";
 import styles from "./mobileSide.module.scss";
 
@@ -9,6 +9,7 @@ interface ISubMenuVisible {
 }
 
 interface Props {
+  mobileSideRef: MutableRefObject<null>;
   sideVisible: boolean;
   handleSide: () => void;
   subMenuVisible: ISubMenuVisible;
@@ -31,6 +32,7 @@ export default function MobileSide({
   handleSide,
   subMenuVisible,
   setSubMenuVisible,
+  mobileSideRef,
 }: Props) {
   const handleSubMenu = (event: MouseEvent<HTMLButtonElement>) => {
     const { category } = event.currentTarget.dataset;
@@ -46,6 +48,7 @@ export default function MobileSide({
 
   return (
     <nav
+      ref={mobileSideRef}
       className={`fixed visible top-16 w-80 min-h-screen z-50 bg-blue-800 opacity-95 ${
         sideVisible === undefined
           ? "-left-80"

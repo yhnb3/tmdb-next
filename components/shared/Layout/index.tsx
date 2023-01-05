@@ -3,8 +3,8 @@ import Header from "./Header";
 import dynamic from "next/dynamic";
 
 import { useRouter } from "next/router";
-import { ReactNode, useEffect, useState } from "react";
-import { useIsMobile } from "hooks";
+import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { useClickAway, useIsMobile } from "hooks";
 
 interface Props {
   children: ReactNode;
@@ -21,11 +21,12 @@ function Layout({ children }: Props) {
     tv: false,
     person: false,
   });
-
   const isMobile = useIsMobile();
-
   const router = useRouter();
-  const handleSide = () => {
+  const mobileSideRef = useRef();
+  const sideBtnRef = useRef();
+
+  const handleSide = useCallback(() => {
     if (!sideVisible) {
       setSubMenuVisible({
         movie: false,
@@ -34,24 +35,36 @@ function Layout({ children }: Props) {
       });
     }
     setSideVisible((prev) => !prev);
-  };
+  }, [sideVisible]);
+
+  const closeSide = useCallback(() => {
+    setSideVisible((prev) => {
+      if (typeof prev === "undefined") return prev;
+      return false;
+    });
+  }, []);
+
+  useClickAway({
+    targetRef: mobileSideRef,
+    buttonRef: sideBtnRef,
+    onClick: closeSide,
+  });
 
   useEffect(() => setSideVisible(undefined), [router]);
 
   return (
     <div className="min-h-screen relative">
-      <Header handleSide={handleSide} />
+      <Header handleSide={handleSide} sideBtnRef={sideBtnRef} />
       {isMobile ? (
         <MobileSide
+          mobileSideRef={mobileSideRef}
           handleSide={handleSide}
           sideVisible={sideVisible}
           subMenuVisible={subMenuVisible}
           setSubMenuVisible={setSubMenuVisible}
         />
       ) : null}
-      <main className="pt-20 mobile:pt-16 pb-20 mobile:h-screen">
-        {children}
-      </main>
+      <main className="pt-20 mobile:pt-16 pb-20 mobile:h-full">{children}</main>
       <Footer />
     </div>
   );
