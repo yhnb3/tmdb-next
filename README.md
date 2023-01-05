@@ -68,3 +68,40 @@
     - 필요없는 `flex` 삭제
     - 필요없는 `div` 삭제
     - 데이터 없는 페이지 더 보기 좋게 수정
+
+#### 20230105
+
+- `useClickAwayHook`을 이용하여 `mobileSideNav`를 좀더 직관성 있게 컨트롤 할 수 있게 함.
+
+  ```tsx
+  export const useClickAway = ({ targetRef, buttonRef, onClick }: Props) => {
+    const hadleClickEvent = useCallback(
+      (e) => {
+        if (!targetRef || !buttonRef) return;
+        const { current: targetEl } = targetRef;
+        const { current: buttonEl } = buttonRef;
+        targetEl &&
+          buttonEl &&
+          !targetEl.contains(e.target) &&
+          !buttonEl.contains(e.target) &&
+          onClick();
+      },
+      [buttonRef, onClick, targetRef]
+    );
+  
+    useEffect(() => {
+      window.addEventListener("click", hadleClickEvent);
+  
+      return () => {
+        window.removeEventListener("click", hadleClickEvent);
+      };
+    }, [hadleClickEvent]);
+  };
+  ```
+
+  - 우선 `target`을 포함하지 않는 elmenet를 클릭했을때 `target`을 닫습니다.
+  - 하지만 `target`을 여는 버튼을 클릭했을때 닫히는 순간 다시 열리는 현상을 막아햐 합니다.
+  - 그래서 `target`을 포함하지 않고 버튼을 포함하지 않는 타겟을 선택했을때만 `onClick`함수를 실행할 수 있도록 합니다.
+  - 그럼 버튼을 클릭했을 경우는 `onClick`이 실행되지 않고 버튼에 따로 달려있는 콜백함수로 인해 `target`을 닫게 합니다.
+
+- search bar에서 빈 글자를 입력하였을때 검색이 안되게끔 수정
