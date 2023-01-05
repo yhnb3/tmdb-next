@@ -1,4 +1,6 @@
-import { useRef } from "react";
+import { FormEventHandler, useRef } from "react";
+
+import { useRouter } from "next/router";
 
 import { FaSearch } from "@react-icons/all-files/fa/FaSearch";
 
@@ -8,7 +10,18 @@ interface IProps {
 
 const Input = ({ query }: IProps) => {
   const queryString = query as string;
-  const inputRef = useRef();
+  const inputRef = useRef(null);
+  const router = useRouter();
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    if (!inputRef.current?.value.trim()) return;
+    inputRef.current &&
+      router.push({
+        pathname: "/search",
+        query: { query: inputRef.current.value },
+      });
+  };
 
   return (
     <div className="flex border-b">
@@ -16,7 +29,7 @@ const Input = ({ query }: IProps) => {
         <div className="flex">
           <FaSearch className="w-3 h-3 my-auto mx-3" />
         </div>
-        <form action="/search?" className="h-10 w-full">
+        <form onSubmit={handleSubmit} className="h-10 w-full">
           <input
             ref={inputRef}
             className="text-gray-400 h-full outline-none"

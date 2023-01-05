@@ -1,5 +1,5 @@
+import { Loading } from "components/shared";
 import { useIsMobile } from "hooks";
-import * as React from "react";
 
 import ContentResult from "./ContentResult";
 import PersonResult from "./PersonResult";
@@ -51,8 +51,8 @@ interface Props {
 }
 
 const SearchResult = (props: Props) => {
-  const isMobile = useIsMobile()
-  if (props.loading) return <p>로딩중...</p>;
+  const isMobile = useIsMobile();
+  if (props.loading) return <Loading />;
   if (props.currentSection === "person")
     return (
       <PersonResult
